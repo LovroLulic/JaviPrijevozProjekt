@@ -1888,3 +1888,182 @@
 2025-11-26 11:49:57,004 WARN [main] app.Main [Main.java:946] Ne postoji linija koja kreće iz stanice Neznam
 2025-11-26 11:49:57,004 TRACE [main] app.Main [Main.java:952] KRAJ - pronadiStanice metoda
 2025-11-26 11:49:57,004 TRACE [main] app.Main [Main.java:183] POVRATAK-Pretrazivanje po polazistu
+2025-11-26 12:01:52,679 TRACE [main] app.Main [Main.java:28] POCETAK - main metoda
+2025-11-26 12:01:52,682 INFO [main] app.Main [Main.java:29] Pokrenut program!
+2025-11-26 12:01:52,693 INFO [main] app.Main [Main.java:1044] Popunjena mapa vozila.
+2025-11-26 12:01:52,706 TRACE [main] app.Main [Main.java:357] POCETAK - login metoda
+2025-11-26 12:01:55,177 DEBUG [main] app.Main [Main.java:363] Uneseno ime i prezime: Lovro Lulic
+2025-11-26 12:01:55,177 TRACE [main] app.Main [Main.java:372] Ime i prezime ispravno uneseno
+2025-11-26 12:01:55,177 TRACE [main] app.Main [Main.java:466] POCETAK - unosGodina metoda
+2025-11-26 12:01:56,285 DEBUG [main] app.Main [Main.java:472] Unesena godina: 20
+2025-11-26 12:01:56,285 TRACE [main] app.Main [Main.java:477] KRAJ - unosGodina metoda - uspjesno: 20
+2025-11-26 12:01:56,286 TRACE [main] app.Main [Main.java:387] Godine ispravno unesene: 20
+2025-11-26 12:01:57,886 DEBUG [main] app.Main [Main.java:410] Uneseno username: llullic
+2025-11-26 12:01:57,886 TRACE [main] app.Main [Main.java:415] Username ispravno unesen
+2025-11-26 12:02:00,691 DEBUG [main] app.Main [Main.java:429] Unesena email adresa: llulic@gmail.com
+2025-11-26 12:02:00,691 TRACE [main] app.Main [Main.java:439] Email ispravno unesen
+2025-11-26 12:02:00,693 TRACE [main] app.Main [Main.java:450] KRAJ - login metoda - kreiran korisnik: llullic
+2025-11-26 12:02:00,695 INFO [main] app.Main [Main.java:101] Korisnik Lovro Lulic (llullic, 20) je prijavljen.
+2025-11-26 12:02:00,695 TRACE [main] app.Main [Main.java:109] ULAZ-Glavni Menu
+2025-11-26 12:02:02,081 TRACE [main] app.Main [Main.java:116] Korisnicki odabir: 2
+2025-11-26 12:02:02,081 TRACE [main] app.Main [Main.java:159] ULAZ-Pretrazivanje
+2025-11-26 12:02:02,081 INFO [main] app.Main [Main.java:160] Korisnik Lovro Lulic (llullic, 20) je odabrao opciju Pretrazivanje.
+2025-11-26 12:02:03,991 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 4
+2025-11-26 12:02:03,991 TRACE [main] app.Main [Main.java:192] ULAZ-Pretrazivanje po liniji
+2025-11-26 12:02:03,991 INFO [main] app.Main [Main.java:193] Korisnik Lovro Lulic (llullic, 20) je odabrao opciju prikaz linije.
+2025-11-26 12:02:03,991 TRACE [main] app.Main [Main.java:873] POCETAK - ispisiLinije metoda
+2025-11-26 12:02:03,991 TRACE [main] app.Main [Main.java:877] Ispis 1. linije
+2025-11-26 12:02:03,993 TRACE [main] app.Main [Main.java:877] Ispis 2. linije
+2025-11-26 12:02:03,994 TRACE [main] app.Main [Main.java:877] Ispis 3. linije
+2025-11-26 12:02:03,994 TRACE [main] app.Main [Main.java:881] KRAJ - ispisiLinije metoda
+2025-11-26 12:02:03,994 TRACE [main] app.Main [Main.java:195] POVRATAK-Pretrazivanje po liniji
+2025-11-26 12:02:09,994 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 1
+2025-11-26 12:02:09,995 TRACE [main] app.Main [Main.java:173] ULAZ-Pretrazivanje po registraciji
+2025-11-26 12:02:09,995 INFO [main] app.Main [Main.java:174] Korisnik Lovro Lulic (llullic, 20) je odabrao opciju pretrazivanje po registraciji.
+2025-11-26 12:02:09,995 TRACE [main] app.Main [Main.java:967] POCETAK - pronadiRegistraciju metoda
+2025-11-26 12:02:13,909 DEBUG [main] app.Main [Main.java:970] Unesena registracija: zg01045c
+2025-11-26 12:02:13,910 TRACE [main] app.Main [Main.java:990] KRAJ - pronadiRegistraciju metoda
+2025-11-26 12:02:13,910 TRACE [main] app.Main [Main.java:176] POVRATAK-Pretrazivanje po registraciji
+2025-11-26 12:02:22,115 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 1
+2025-11-26 12:02:22,115 TRACE [main] app.Main [Main.java:173] ULAZ-Pretrazivanje po registraciji
+2025-11-26 12:02:22,115 INFO [main] app.Main [Main.java:174] Korisnik Lovro Lulic (llullic, 20) je odabrao opciju pretrazivanje po registraciji.
+2025-11-26 12:02:22,115 TRACE [main] app.Main [Main.java:967] POCETAK - pronadiRegistraciju metoda
+2025-11-26 12:02:24,691 DEBUG [main] app.Main [Main.java:970] Unesena registracija: ZG01045C
+2025-11-26 12:02:24,691 TRACE [main] app.Main [Main.java:990] KRAJ - pronadiRegistraciju metoda
+2025-11-26 12:02:24,691 TRACE [main] app.Main [Main.java:176] POVRATAK-Pretrazivanje po registraciji
+2025-11-26 12:04:41,901 TRACE [main] app.Main [Main.java:28] POCETAK - main metoda
+2025-11-26 12:04:41,904 INFO [main] app.Main [Main.java:29] Pokrenut program!
+2025-11-26 12:04:41,916 INFO [main] app.Main [Main.java:1044] Popunjena mapa vozila.
+2025-11-26 12:04:41,927 TRACE [main] app.Main [Main.java:357] POCETAK - login metoda
+2025-11-26 12:04:43,799 DEBUG [main] app.Main [Main.java:363] Uneseno ime i prezime: Lovro l
+2025-11-26 12:04:43,799 TRACE [main] app.Main [Main.java:372] Ime i prezime ispravno uneseno
+2025-11-26 12:04:43,799 TRACE [main] app.Main [Main.java:466] POCETAK - unosGodina metoda
+2025-11-26 12:04:44,436 DEBUG [main] app.Main [Main.java:472] Unesena godina: 20
+2025-11-26 12:04:44,436 TRACE [main] app.Main [Main.java:477] KRAJ - unosGodina metoda - uspjesno: 20
+2025-11-26 12:04:44,438 TRACE [main] app.Main [Main.java:387] Godine ispravno unesene: 20
+2025-11-26 12:04:46,724 DEBUG [main] app.Main [Main.java:410] Uneseno username: llulic
+2025-11-26 12:04:46,724 TRACE [main] app.Main [Main.java:415] Username ispravno unesen
+2025-11-26 12:04:50,034 DEBUG [main] app.Main [Main.java:429] Unesena email adresa: llulic@gmail.com
+2025-11-26 12:04:50,035 TRACE [main] app.Main [Main.java:439] Email ispravno unesen
+2025-11-26 12:04:50,035 TRACE [main] app.Main [Main.java:450] KRAJ - login metoda - kreiran korisnik: llulic
+2025-11-26 12:04:50,036 INFO [main] app.Main [Main.java:101] Korisnik Lovro l (llulic, 20) je prijavljen.
+2025-11-26 12:04:50,037 TRACE [main] app.Main [Main.java:109] ULAZ-Glavni Menu
+2025-11-26 12:04:51,005 TRACE [main] app.Main [Main.java:116] Korisnicki odabir: 2
+2025-11-26 12:04:51,005 TRACE [main] app.Main [Main.java:159] ULAZ-Pretrazivanje
+2025-11-26 12:04:51,005 INFO [main] app.Main [Main.java:160] Korisnik Lovro l (llulic, 20) je odabrao opciju Pretrazivanje.
+2025-11-26 12:04:51,585 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 1
+2025-11-26 12:04:51,585 TRACE [main] app.Main [Main.java:173] ULAZ-Pretrazivanje po registraciji
+2025-11-26 12:04:51,586 INFO [main] app.Main [Main.java:174] Korisnik Lovro l (llulic, 20) je odabrao opciju pretrazivanje po registraciji.
+2025-11-26 12:04:51,586 TRACE [main] app.Main [Main.java:967] POCETAK - pronadiRegistraciju metoda
+2025-11-26 12:04:54,626 DEBUG [main] app.Main [Main.java:970] Unesena registracija: zg01045c
+2025-11-26 12:04:54,628 TRACE [main] app.Main [Main.java:990] KRAJ - pronadiRegistraciju metoda
+2025-11-26 12:04:54,628 TRACE [main] app.Main [Main.java:176] POVRATAK-Pretrazivanje po registraciji
+2025-11-26 14:00:13,717 TRACE [main] app.Main [Main.java:28] POCETAK - main metoda
+2025-11-26 14:00:13,723 INFO [main] app.Main [Main.java:29] Pokrenut program!
+2025-11-26 14:00:13,738 INFO [main] app.Main [Main.java:1051] Popunjena mapa vozila.
+2025-11-26 14:00:13,751 TRACE [main] app.Main [Main.java:357] POCETAK - login metoda
+2025-11-26 14:00:17,218 DEBUG [main] app.Main [Main.java:363] Uneseno ime i prezime: Lovro Lulic
+2025-11-26 14:00:17,218 TRACE [main] app.Main [Main.java:372] Ime i prezime ispravno uneseno
+2025-11-26 14:00:17,219 TRACE [main] app.Main [Main.java:466] POCETAK - unosGodina metoda
+2025-11-26 14:00:18,858 DEBUG [main] app.Main [Main.java:472] Unesena godina: 20
+2025-11-26 14:00:18,859 TRACE [main] app.Main [Main.java:477] KRAJ - unosGodina metoda - uspjesno: 20
+2025-11-26 14:00:18,860 TRACE [main] app.Main [Main.java:387] Godine ispravno unesene: 20
+2025-11-26 14:00:19,874 DEBUG [main] app.Main [Main.java:410] Uneseno username: llulic
+2025-11-26 14:00:19,874 TRACE [main] app.Main [Main.java:415] Username ispravno unesen
+2025-11-26 14:00:22,926 DEBUG [main] app.Main [Main.java:429] Unesena email adresa: llulic@gmail.com
+2025-11-26 14:00:22,927 TRACE [main] app.Main [Main.java:439] Email ispravno unesen
+2025-11-26 14:00:22,927 TRACE [main] app.Main [Main.java:450] KRAJ - login metoda - kreiran korisnik: llulic
+2025-11-26 14:00:22,929 INFO [main] app.Main [Main.java:101] Korisnik Lovro Lulic (llulic, 20) je prijavljen.
+2025-11-26 14:00:22,930 TRACE [main] app.Main [Main.java:109] ULAZ-Glavni Menu
+2025-11-26 14:00:24,161 TRACE [main] app.Main [Main.java:116] Korisnicki odabir: 2
+2025-11-26 14:00:24,162 TRACE [main] app.Main [Main.java:159] ULAZ-Pretrazivanje
+2025-11-26 14:00:24,162 INFO [main] app.Main [Main.java:160] Korisnik Lovro Lulic (llulic, 20) je odabrao opciju Pretrazivanje.
+2025-11-26 14:00:27,782 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 6
+2025-11-26 14:00:27,782 TRACE [main] app.Main [Main.java:204] ULAZ-Pretrazivanje po godinama proizvodnje
+2025-11-26 14:00:27,782 INFO [main] app.Main [Main.java:205] Korisnik Lovro Lulic (llulic, 20) je odabrao opciju pretrazivanje po godinama proizvodnje.
+2025-11-26 14:00:27,782 TRACE [main] app.Main [Main.java:1004] POCETAK - pronadiGodinuProizvodnje metoda
+2025-11-26 14:00:29,017 DEBUG [main] app.Main [Main.java:1009] Korisnik odabrao odabir: 1
+2025-11-26 14:00:29,021 INFO [main] app.Main [Main.java:1013] Unesena opcija: Najnovije vozilo
+2025-11-26 14:00:33,809 DEBUG [main] app.Main [Main.java:1009] Korisnik odabrao odabir: 2
+2025-11-26 14:00:33,810 INFO [main] app.Main [Main.java:1024] Unesena opcija: Najstarije vozilo
+2025-11-26 14:00:36,962 DEBUG [main] app.Main [Main.java:1009] Korisnik odabrao odabir: 3
+2025-11-26 14:00:36,962 INFO [main] app.Main [Main.java:1034] Korisnik odabrao opciju izlaz.
+2025-11-26 14:00:36,962 TRACE [main] app.Main [Main.java:1038] KRAJ - pronadiGodinuProizvodnje metoda
+2025-11-26 14:00:36,962 TRACE [main] app.Main [Main.java:207] POVRATAK-Pretrazivanje po godinama proizvodnje
+2025-11-26 14:00:38,480 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 8
+2025-11-26 14:00:38,481 TRACE [main] app.Main [Main.java:215] IZLAZ - Pretrazivanje
+2025-11-26 14:00:38,481 INFO [main] app.Main [Main.java:216] Korisnik Lovro Lulic (llulic, 20) je odabrao opciju izlaz.
+2025-11-26 14:00:38,481 TRACE [main] app.Main [Main.java:109] ULAZ-Glavni Menu
+2025-11-26 14:00:39,640 TRACE [main] app.Main [Main.java:116] Korisnicki odabir: 3
+2025-11-26 14:00:39,640 TRACE [main] app.Main [Main.java:223] IZLAZ - Glavni Menu
+2025-11-26 14:00:39,640 INFO [main] app.Main [Main.java:224] Korisnik je izasao iz programa
+2025-11-26 14:00:39,641 INFO [main] app.Main [Main.java:232] Program zatvoren.
+2025-11-26 14:00:39,641 TRACE [main] app.Main [Main.java:233] KRAJ - main metoda
+2025-11-26 14:24:33,992 TRACE [main] app.Main [Main.java:28] POCETAK - main metoda
+2025-11-26 14:24:33,999 INFO [main] app.Main [Main.java:29] Pokrenut program!
+2025-11-26 14:24:34,103 INFO [main] app.Main [Main.java:1050] Popunjena mapa vozila.
+2025-11-26 14:24:34,130 TRACE [main] app.Main [Main.java:357] POCETAK - login metoda
+2025-11-26 14:24:44,054 DEBUG [main] app.Main [Main.java:363] Uneseno ime i prezime: Lovro Lulic
+2025-11-26 14:24:44,055 TRACE [main] app.Main [Main.java:372] Ime i prezime ispravno uneseno
+2025-11-26 14:24:44,055 TRACE [main] app.Main [Main.java:466] POCETAK - unosGodina metoda
+2025-11-26 14:24:44,673 DEBUG [main] app.Main [Main.java:472] Unesena godina: 20
+2025-11-26 14:24:44,674 TRACE [main] app.Main [Main.java:477] KRAJ - unosGodina metoda - uspjesno: 20
+2025-11-26 14:24:44,676 TRACE [main] app.Main [Main.java:387] Godine ispravno unesene: 20
+2025-11-26 14:24:45,774 DEBUG [main] app.Main [Main.java:410] Uneseno username: llulic
+2025-11-26 14:24:45,774 TRACE [main] app.Main [Main.java:415] Username ispravno unesen
+2025-11-26 14:24:48,514 DEBUG [main] app.Main [Main.java:429] Unesena email adresa: llulic@gmail.com
+2025-11-26 14:24:48,514 TRACE [main] app.Main [Main.java:439] Email ispravno unesen
+2025-11-26 14:24:48,514 TRACE [main] app.Main [Main.java:450] KRAJ - login metoda - kreiran korisnik: llulic
+2025-11-26 14:24:48,518 INFO [main] app.Main [Main.java:101] Korisnik Lovro Lulic (llulic, 20) je prijavljen.
+2025-11-26 14:24:48,519 TRACE [main] app.Main [Main.java:109] ULAZ-Glavni Menu
+2025-11-26 14:24:53,031 TRACE [main] app.Main [Main.java:116] Korisnicki odabir: 2
+2025-11-26 14:24:53,031 TRACE [main] app.Main [Main.java:159] ULAZ-Pretrazivanje
+2025-11-26 14:24:53,031 INFO [main] app.Main [Main.java:160] Korisnik Lovro Lulic (llulic, 20) je odabrao opciju Pretrazivanje.
+2025-11-26 14:25:02,933 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 5
+2025-11-26 14:25:02,933 TRACE [main] app.Main [Main.java:198] ULAZ-Pretrazivanje po vozilu
+2025-11-26 14:25:02,933 INFO [main] app.Main [Main.java:199] Korisnik Lovro Lulic (llulic, 20) je odabrao opciju prikaz vozila.
+2025-11-26 14:25:02,933 TRACE [main] app.Main [Main.java:855] POCETAK - ispisiVozila metoda
+2025-11-26 14:25:02,934 TRACE [main] app.Main [Main.java:285] POCETAK - dostupnostVozila metoda
+2025-11-26 14:25:02,936 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,937 TRACE [main] app.Main [Main.java:259] Pronadjeno vozilo na indexu: 0
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:268] Vozilo nije pronadjeno
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:269] KRAJ - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:259] Pronadjeno vozilo na indexu: 1
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:268] Vozilo nije pronadjeno
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:269] KRAJ - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:268] Vozilo nije pronadjeno
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:269] KRAJ - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:259] Pronadjeno vozilo na indexu: 2
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:268] Vozilo nije pronadjeno
+2025-11-26 14:25:02,938 TRACE [main] app.Main [Main.java:269] KRAJ - isVehicleUsed metoda
+2025-11-26 14:25:02,939 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,939 TRACE [main] app.Main [Main.java:259] Pronadjeno vozilo na indexu: 0
+2025-11-26 14:25:02,939 TRACE [main] app.Main [Main.java:304] Vozilo ZG19055A nedostupno - koristi se na liniji Velika Gorica - Aerodrom
+2025-11-26 14:25:02,940 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,940 TRACE [main] app.Main [Main.java:259] Pronadjeno vozilo na indexu: 1
+2025-11-26 14:25:02,940 TRACE [main] app.Main [Main.java:304] Vozilo ZG01045C nedostupno - koristi se na liniji Glavni Kolodvor - Vrapce
+2025-11-26 14:25:02,940 TRACE [main] app.Main [Main.java:249] POCETAK - isVehicleUsed metoda
+2025-11-26 14:25:02,940 TRACE [main] app.Main [Main.java:259] Pronadjeno vozilo na indexu: 2
+2025-11-26 14:25:02,940 TRACE [main] app.Main [Main.java:304] Vozilo ZG01045F nedostupno - koristi se na liniji Prisavlje - Mihaljevac
+2025-11-26 14:25:02,940 TRACE [main] app.Main [Main.java:315] Vozilo ZG23045B dostupno
+2025-11-26 14:25:02,941 TRACE [main] app.Main [Main.java:315] Vozilo ZG01045D dostupno
+2025-11-26 14:25:02,941 TRACE [main] app.Main [Main.java:315] Vozilo ZG01045E dostupno
+2025-11-26 14:25:02,941 TRACE [main] app.Main [Main.java:315] Vozilo ZG01045G dostupno
+2025-11-26 14:25:02,941 TRACE [main] app.Main [Main.java:339] KRAJ - dostupnostVozila metoda
+2025-11-26 14:25:02,941 TRACE [main] app.Main [Main.java:859] KRAJ - ispisiVozila metoda
+2025-11-26 14:25:02,942 TRACE [main] app.Main [Main.java:201] POVRATAK-Pretrazivanje po vozilu
+2025-11-26 14:25:07,564 TRACE [main] app.Main [Main.java:170] Pretrazivanje odabir: 8
+2025-11-26 14:25:07,564 TRACE [main] app.Main [Main.java:215] IZLAZ - Pretrazivanje
+2025-11-26 14:25:07,564 INFO [main] app.Main [Main.java:216] Korisnik Lovro Lulic (llulic, 20) je odabrao opciju izlaz.
+2025-11-26 14:25:07,564 TRACE [main] app.Main [Main.java:109] ULAZ-Glavni Menu
+2025-11-26 14:25:08,475 TRACE [main] app.Main [Main.java:116] Korisnicki odabir: 3
+2025-11-26 14:25:08,475 TRACE [main] app.Main [Main.java:223] IZLAZ - Glavni Menu
+2025-11-26 14:25:08,475 INFO [main] app.Main [Main.java:224] Korisnik je izasao iz programa
+2025-11-26 14:25:08,475 INFO [main] app.Main [Main.java:232] Program zatvoren.
+2025-11-26 14:25:08,475 TRACE [main] app.Main [Main.java:233] KRAJ - main metoda
