@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 
 public class Main {
 
+    private static final String GRESKA_POKUSAJTE_PONOVO ="{} Pokusajte ponovo:";
+
     static Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
@@ -147,6 +149,7 @@ public class Main {
                         case 6 -> pronadiGodinuProizvodnje(scanner, vehicles);
                         case 7 -> podjelaNaElektricna(vehicles);
                         case 8 -> odabir2=8;
+                        default -> log.info("Nedozvoljeni odabir.");
                     }
                 }
             } else if (odabir == 3) {
@@ -228,7 +231,7 @@ public class Main {
                 if (korisnik.provjeriGodine(age)) break;
                 else log.info("Pogresna godina (10-100). Pokusajte ponovo: ");
             } catch (PogresanUnosException | NegativniUnosException e) {
-                log.info("{}, pokusajte ponovo", e.getMessage());
+                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
             }
         }
 
@@ -255,7 +258,7 @@ public class Main {
                     email = null;
                 }
             } catch (PraznoException e) {
-                log.info("{}, Pokusajte ponovo: ", e.getMessage());
+                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
                 email = null;
             }
         }
@@ -326,7 +329,7 @@ public class Main {
 
             dodavanjeLinija(brojLinijaZaDodavanje, scanner, vehicles, routes, cjenik);
         } catch (NegativniUnosException e) {
-            log.info("{}, pokusajte ponovo: ",e.getMessage());
+            log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
             scanner.nextLine();
         }
     }
@@ -346,7 +349,7 @@ public class Main {
 
             dodavanjeVozila(brojVozilaZaDodavanje, scanner, vehicles, registracije);
         } catch (NegativniUnosException e) {
-            log.info("{}, pokusajte ponovo: ",e.getMessage());
+            log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
             scanner.nextLine();
         }
     }
@@ -441,7 +444,7 @@ public class Main {
                 }
                 return kilometers;
             } catch (NegativniUnosException e) {
-                log.info("{}, pokusajte ponovo: ",e.getMessage());
+                log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
             } catch (NumberFormatException _) {
                 log.info("Kilometraza mora biti broj. Pokusajte ponovo: ");
             }
@@ -453,7 +456,7 @@ public class Main {
             try {
                 return unosDatum(scanner);
             } catch (PogresanDatumException e) {
-                log.info("{}, pokusajte ponovo: ",e.getMessage());
+                log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
             }
         }
     }
@@ -489,7 +492,7 @@ public class Main {
             try {
                 return unosGodina(scanner);
             } catch (PogresanUnosException | NegativniUnosException e) {
-                log.info("{}, pokusajte ponovo: ",e.getMessage());
+                log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
             }
         }
     }
