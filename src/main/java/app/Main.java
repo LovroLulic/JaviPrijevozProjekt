@@ -897,31 +897,21 @@ public class Main {
             System.out.println("1)Najkraca linija\n2)Najduza linija\n3)Izlaz");
             odabir2 = scanner.nextInt();
             log.debug("Uneseno odabir2: "+odabir2);
+            routes.sort(Comparator.comparing((Route::getKilometers)).reversed());
+//            routes.sort((r1,r2)->r1.getKilometers().compareTo(r2.getKilometers()));  lambda
             if (odabir2==1) {
                 log.info("Unesena opcija: Najkraca Linija");
-                BigDecimal najkraca = new BigDecimal(1000);
-                routes.sort((r1, r2) -> r1.getKilometers().compareTo(r2.getKilometers()));
-                System.out.println();
                 System.out.println("Najkraca linija: ");
+                routes.getLast().ispis();
                 System.out.println();
-                routes.getFirst().ispis();
-                System.out.println();
-                continue;
             }
 
             else if (odabir2==2) {
                 log.debug("Unesena odabir2: "+odabir2);
                 log.info("Unesena opcija: Najduza Linija");
-                BigDecimal najduzna = new BigDecimal(0);
-                int index = -1;
-                routes.sort((r1,r2)->r1.getKilometers().compareTo(r2.getKilometers())); //mogu i zamjenit r1 i
-                                                                                                    // r2, ovo sam iso isprobat getLast
-                System.out.println();
                 System.out.println("Najduza linija: ");
+                routes.getFirst().ispis();
                 System.out.println();
-                routes.getLast().ispis();
-                System.out.println();
-                continue;
             }
 
             else if(odabir2==3){
@@ -947,24 +937,20 @@ public class Main {
         System.out.print("Unesite polaziste: ");
         String polaziste = scanner.nextLine();
         log.debug("Uneseno polaziste: "+polaziste);
-        boolean postoji=false;
-        for (int i = 0; i < brojRuta; i++) {
-            log.trace("Provjera rute {}: {}", i, routes.get(i).getPocetnastanica());
-            if (polaziste.equalsIgnoreCase(routes.get(i).getPocetnastanica())) {
-                System.out.println();
-                routes.get(i).ispis();
-                postoji=true;
-                System.out.println();
-            }
+
+        List<Route>pocetneStanice=routes.stream()
+                .filter(route->polaziste.equalsIgnoreCase(route.getPocetnastanica()))
+                .toList();
+
+        if(pocetneStanice.isEmpty()){
+            log.warn("Ne postoji linija koja kreće iz stanice "+polaziste);
+            System.out.println("Ne postoji linija koja kreće iz stanice "+polaziste+".");
         }
-        if(!postoji){
-            log.warn("Uneseno polaziste "+polaziste+" ne postoji u listi linija.");
-            System.out.println("⚠\uFE0F Greska! Nema linije koja krece iz "+polaziste);
-        } else {
-            log.trace("Pronadjeno polaziste: {}", polaziste);
+        else{
+            pocetneStanice.forEach(Route::ispis);
         }
         log.trace("KRAJ - pronadiStanice metoda");
-        return;
+
     }
 
     /**
@@ -1022,9 +1008,9 @@ public class Main {
             odabir= scanner.nextInt();
             log.debug("Korisnik odabrao odabir: "+odabir);
             scanner.nextLine();
+            vehicles.sort(Comparator.comparing(Vehicle::getYear).reversed());
             if (odabir == 1) {
                 log.info("Unesena opcija: Najnovije vozilo");
-                vehicles.sort(Comparator.comparing(Vehicle::getYear).reversed());
                 System.out.println("===Najnovije vozilo===\n");
                 vehicles.getFirst().ispis();
                 System.out.println("-----------------------------");
@@ -1032,9 +1018,8 @@ public class Main {
             }
             else if (odabir == 2) {
                 log.info("Unesena opcija: Najstarije vozilo");
-                vehicles.sort(Comparator.comparing(Vehicle::getYear));
                 System.out.println("===Najstarije vozilo===\n");
-                vehicles.getFirst().ispis();
+                vehicles.getLast().ispis();
                 System.out.println("-----------------------------");
                 System.out.println();
             }
