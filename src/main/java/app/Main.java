@@ -85,13 +85,13 @@ public class Main {
         // Login korisnika
         korisnik = login(scanner, korisnik);
         log.info("Korisnik {} ({}, {}) je prijavljen.", korisnik.getName(), korisnik.getNameID(), korisnik.getAge());
-        System.out.println("\nDobrodosao " + korisnik.getName() + " (" + korisnik.getNameID() + ", " + korisnik.getAge() + ")");
+        log.info("\nDobrodosao {} ({}, {})", korisnik.getName(), korisnik.getNameID(), korisnik.getAge());
 
         // Glavni menu
         do {
-            System.out.println("\n1) Unos vozila i linije");
-            System.out.println("2) Pretrazivanje");
-            System.out.println("3) Izlaz");
+            log.info("\n1) Unos vozila i linije");
+            log.info("2) Pretrazivanje");
+            log.info("3) Izlaz");
 
             int odabir = scanner.nextInt();
             scanner.nextLine();
@@ -101,10 +101,10 @@ public class Main {
                 if (provjeraAdmin(korisnik, scanner)) continue;
 
                 while (true) {
-                    System.out.println("\n=== UNOS VOZILA I LINIJA ===");
-                    System.out.println("Trenutno stanje vozila: " + vehicles.size());
-                    System.out.println("Trenutno stanje linija: " + routes.size());
-                    System.out.println("\n1) Unos novog vozila\n2) Unos novih linija\n3) Izlaz");
+                    log.info("\n=== UNOS VOZILA I LINIJA ===");
+                    log.info("Trenutno stanje vozila: {}", vehicles.size());
+                    log.info("Trenutno stanje linija: {}", routes.size());
+                    log.info("\n1) Unos novog vozila\n2) Unos novih linija\n3) Izlaz");
 
                     odabir = scanner.nextInt();
                     scanner.nextLine();
@@ -119,22 +119,23 @@ public class Main {
                 }
             } else if (odabir == 2) {
                 if (routes.isEmpty()) {
-                    System.out.println("Nema vozila i linija.");
+                    log.info("Nema vozila i linija.");
                     continue;
                 }
 
-                while (true) {
-                    System.out.println("\nPretrazivanje po:");
-                    System.out.println("1) Registracija");
-                    System.out.println("2) Polaziste");
-                    System.out.println("3) Kilometraza");
-                    System.out.println("4) Prikaz linija");
-                    System.out.println("5) Vozila");
-                    System.out.println("6) Godine Proizvodnje");
-                    System.out.println("7) Elektricna");
-                    System.out.println("8) Izlaz");
+                int odabir2=0;
+                while (odabir2!=8) {
+                    log.info("\nPretrazivanje po:");
+                    log.info("1) Registracija");
+                    log.info("2) Polaziste");
+                    log.info("3) Kilometraza");
+                    log.info("4) Prikaz linija");
+                    log.info("5) Vozila");
+                    log.info("6) Godine Proizvodnje");
+                    log.info("7) Elektricna");
+                    log.info("8) Izlaz");
 
-                    int odabir2 = scanner.nextInt();
+                    odabir2 = scanner.nextInt();
                     scanner.nextLine();
 
                     switch (odabir2) {
@@ -145,11 +146,11 @@ public class Main {
                         case 5 -> ispisiVozila(vehicles, routes);
                         case 6 -> pronadiGodinuProizvodnje(scanner, vehicles);
                         case 7 -> podjelaNaElektricna(vehicles);
-                        case 8 -> { return; }
+                        case 8 -> odabir2=8;
                     }
                 }
             } else if (odabir == 3) {
-                System.out.println("Hvala na koristenju!");
+                log.info("Hvala na koristenju!");
                 break;
             }
         } while (true);
@@ -186,14 +187,14 @@ public class Main {
                 v.ispis();
                 int index = isVehicleUsed(v, routes);
                 Route r = routes.get(index);
-                System.out.println("⚠️ NEDOSTUPAN - Linija " + r.getPocetnastanica() + " - " + r.getKrajnastanica() + "\n");
+                log.info("⚠️ NEDOSTUPAN - Linija {} - {}\n", r.getPocetnastanica(), r.getKrajnastanica());
             }
         });
 
         Optional.ofNullable(vozilaPoDostupnosti.get(false)).ifPresent(dostupna -> {
             for (Vehicle v : dostupna) {
                 v.ispis();
-                System.out.println("✅ DOSTUPAN\n");
+                log.info("✅ DOSTUPAN\n");
             }
         });
     }
@@ -202,7 +203,7 @@ public class Main {
      * Obavlja proces prijave korisnika u sustav.
      */
     private static User login(Scanner scanner, User korisnik) {
-        System.out.print("Unesite ime i prezime: ");
+        log.info("Unesite ime i prezime: ");
         String name = null;
         while (name == null) {
             try {
@@ -210,51 +211,51 @@ public class Main {
                 if (name.isEmpty()) {
                     throw new PraznoException("Nedostaje ime i prezime.");
                 } else if (!korisnik.provjeriImePrezime(name)) {
-                    System.out.print("Morate unijeti i ime i prezime. Pokusajte ponovo: ");
+                    log.info("Morate unijeti i ime i prezime. Pokusajte ponovo: ");
                     name = null;
                 }
-            } catch (PraznoException e) {
-                System.out.print("Pogresno uneseni ime i prezime. Pokusajte ponovo: ");
+            } catch (PraznoException _) {
+                log.info("Pogresno uneseni ime i prezime. Pokusajte ponovo: ");
                 name = null;
             }
         }
 
-        System.out.print("Broj godina: ");
-        int age = 0;
+        log.info("Broj godina: ");
+        int age;
         while (true) {
             try {
                 age = unosGodina(scanner);
                 if (korisnik.provjeriGodine(age)) break;
-                else System.out.print("Pogresna godina (10-100). Pokusajte ponovo: ");
+                else log.info("Pogresna godina (10-100). Pokusajte ponovo: ");
             } catch (PogresanUnosException | NegativniUnosException e) {
-                System.out.print(e.getMessage() + " Pokusajte ponovo: ");
+                log.info("{}, pokusajte ponovo", e.getMessage());
             }
         }
 
-        System.out.print("Unesite username: ");
+        log.info("Unesite username: ");
         String nameID = null;
         while (nameID == null) {
             try {
                 nameID = scanner.nextLine();
                 if (nameID.isEmpty()) throw new PraznoException("Nedostaje username.");
-            } catch (PraznoException e) {
-                System.out.print("Pogresno uneseni username. Pokusajte ponovo: ");
+            } catch (PraznoException _) {
+                log.info("Pogresno uneseni username. Pokusajte ponovo: ");
                 nameID = null;
             }
         }
 
-        System.out.print("Unesite email adresu: ");
+        log.info("Unesite email adresu: ");
         String email = null;
         while (email == null) {
             try {
                 email = scanner.nextLine();
                 if (email.isEmpty()) throw new PraznoException("Nedostaje email adresa.");
                 else if (!korisnik.provjeriMail(email)) {
-                    System.out.print("Pogresni format email adrese. Pokusajte ponovo: ");
+                    log.info("Pogresni format email adrese. Pokusajte ponovo: ");
                     email = null;
                 }
             } catch (PraznoException e) {
-                System.out.print(e.getMessage() + " Pokusajte ponovo: ");
+                log.info("{}, Pokusajte ponovo: ", e.getMessage());
                 email = null;
             }
         }
@@ -271,7 +272,7 @@ public class Main {
             scanner.nextLine();
             if (age < 0) throw new NegativniUnosException("Godina ne smije biti negativna.");
             return age;
-        } catch (InputMismatchException e) {
+        } catch (InputMismatchException _) {
             throw new PogresanUnosException("Godina mora biti cijeli broj.");
         }
     }
@@ -284,7 +285,7 @@ public class Main {
         String datum = scanner.nextLine();
         try {
             return LocalDate.parse(datum, formatter);
-        } catch (DateTimeParseException ex) {
+        } catch (DateTimeParseException _) {
             throw new PogresanDatumException("Datum mora biti u formatu dd.MM.yyyy.");
         }
     }
@@ -294,19 +295,19 @@ public class Main {
      */
     private static boolean provjeraAdmin(User korisnik, Scanner scanner) {
         if (!korisnik.getNameID().equals("llulic")) {
-            System.out.println("Greska! Korisnik " + korisnik.getNameID() + " nije autoriziran za ovu opciju.");
+            log.info("Greska! Korisnik {} nije autoriziran za ovu opciju.", korisnik.getNameID());
             return true;
         }
 
-        System.out.print("Unesite lozinku za administratora (" + korisnik.getNameID() + "): ");
+        log.info("Unesite lozinku za administratora ({}): ",korisnik.getNameID());
         String lozinka = scanner.nextLine();
 
         if (!"admin123".equals(lozinka)) {
-            System.out.println("Greska! Lozinka nije ispravna.");
+            log.info("Greska! Lozinka nije ispravna.");
             return true;
         }
 
-        System.out.println("Lozinka je ispravna.");
+        log.info("Lozinka je ispravna.");
         return false;
     }
 
@@ -315,7 +316,7 @@ public class Main {
      */
     private static void procesDodavanjaLinije(List<Route> routes, Scanner scanner, List<Vehicle> vehicles, CijenaKarte cjenik) {
         try {
-            System.out.print("Koliko novih linija zelite dodati? ");
+            log.info("Koliko novih linija zelite dodati? ");
             int brojLinijaZaDodavanje = scanner.nextInt();
             scanner.nextLine();
 
@@ -325,7 +326,7 @@ public class Main {
 
             dodavanjeLinija(brojLinijaZaDodavanje, scanner, vehicles, routes, cjenik);
         } catch (NegativniUnosException e) {
-            System.out.print(e.getMessage() + " Pokusajte ponovo: ");
+            log.info("{}, pokusajte ponovo: ",e.getMessage());
             scanner.nextLine();
         }
     }
@@ -335,7 +336,7 @@ public class Main {
      */
     private static void procesDodavanjaVozila(List<Vehicle> vehicles, Scanner scanner, Set<String> registracije) {
         try {
-            System.out.print("Koliko novih vozila zelite dodati? ");
+            log.info("Koliko novih vozila zelite dodati? ");
             int brojVozilaZaDodavanje = scanner.nextInt();
             scanner.nextLine();
 
@@ -345,7 +346,7 @@ public class Main {
 
             dodavanjeVozila(brojVozilaZaDodavanje, scanner, vehicles, registracije);
         } catch (NegativniUnosException e) {
-            System.out.print(e.getMessage() + " Pokusajte ponovo: ");
+            log.info("{}, pokusajte ponovo: ",e.getMessage());
             scanner.nextLine();
         }
     }
@@ -356,19 +357,19 @@ public class Main {
     private static void dodavanjeLinija(int brojLinijaZaDodavanje, Scanner scanner, List<Vehicle> vehicles,
                                         List<Route> routes, CijenaKarte cjenik) {
         for (int i = 0; i < brojLinijaZaDodavanje; i++) {
-            System.out.print("Pocetna stanica: ");
+            log.info("Pocetna stanica: ");
             String pocetnastanica = unesiNePrazno(scanner, "pocetna stanica");
 
-            System.out.print("Krajnja stanica: ");
+            log.info("Krajnja stanica: ");
             String krajnjastanica = unesiNePrazno(scanner, "krajnja stanica");
 
-            System.out.print("Kilometraza: ");
+            log.info("Kilometraza: ");
             BigDecimal kilometers = unesiKilometrazu(scanner);
 
-            System.out.print("Datum polaska (dd.MM.yyyy): ");
+            log.info("Datum polaska (dd.MM.yyyy): ");
             LocalDate datum = unesiDatum(scanner);
 
-            System.out.print("Vrijeme polaska: ");
+            log.info("Vrijeme polaska: ");
             String vrijemepolaska = scanner.nextLine();
 
             Vehicle odabranovozilo = pronadiVoziloPoRegistraciji(scanner, vehicles);
@@ -381,7 +382,7 @@ public class Main {
                     .cjenik(cjenik)
                     .build());
 
-            System.out.println("Linija uspjesno dodana!");
+            log.info("Linija uspjesno dodana!");
         }
     }
 
@@ -391,22 +392,22 @@ public class Main {
     private static void dodavanjeVozila(int brojVozilaZaDodavanje, Scanner scanner,
                                         List<Vehicle> vehicles, Set<String> registracije) {
         for (int i = 0; i < brojVozilaZaDodavanje; i++) {
-            System.out.print("Unesite registraciju: ");
+            log.info("Unesite registraciju: ");
             String registration = scanner.nextLine();
 
             if (registracije.contains(registration.toLowerCase())) {
-                System.out.println("Greska! Vozilo sa registracijom " + registration + " vec postoji.");
+                log.info("Greska! Vozilo sa registracijom {} vec postoji.", registration);
                 i--;
                 continue;
             }
 
-            System.out.print("Unesite tip vozila (Bus/Tramvaj): ");
+            log.info("Unesite tip vozila (Bus/Tramvaj): ");
             String model = unesiTipVozila(scanner);
 
-            System.out.print("Unesite boju: ");
+            log.info("Unesite boju: ");
             String color = scanner.nextLine();
 
-            System.out.print("Unesite godinu proizvodnje: ");
+            log.info("Unesite godinu proizvodnje: ");
             int year = unesiGodinu(scanner);
             scanner.nextLine();
 
@@ -417,7 +418,7 @@ public class Main {
             }
 
             registracije.add(registration.toLowerCase());
-            System.out.println("Uspjesno dodano vozilo.");
+            log.info("Uspjesno dodano vozilo.");
         }
     }
 
@@ -427,7 +428,7 @@ public class Main {
         while (true) {
             unos = scanner.nextLine();
             if (!unos.isEmpty()) return unos;
-            System.out.print("Nedostaje " + naziv + ". Pokusajte ponovo: ");
+            log.info("Nedostaje {}. Pokusajte ponovo: ",naziv);
         }
     }
 
@@ -440,9 +441,9 @@ public class Main {
                 }
                 return kilometers;
             } catch (NegativniUnosException e) {
-                System.out.print(e.getMessage() + " Pokusajte ponovo: ");
-            } catch (NumberFormatException e) {
-                System.out.print("Kilometraza mora biti broj. Pokusajte ponovo: ");
+                log.info("{}, pokusajte ponovo: ",e.getMessage());
+            } catch (NumberFormatException _) {
+                log.info("Kilometraza mora biti broj. Pokusajte ponovo: ");
             }
         }
     }
@@ -452,22 +453,25 @@ public class Main {
             try {
                 return unosDatum(scanner);
             } catch (PogresanDatumException e) {
-                System.out.print(e.getMessage() + " Pokusajte ponovo: ");
+                log.info("{}, pokusajte ponovo: ",e.getMessage());
             }
         }
     }
 
     private static Vehicle pronadiVoziloPoRegistraciji(Scanner scanner, List<Vehicle> vehicles) {
         while (true) {
-            System.out.print("Unesite registraciju vozila: ");
+            log.info("Unesite registraciju vozila: ");
             String registracija = scanner.nextLine();
 
             Optional<Vehicle> vozilo = vehicles.stream()
                     .filter(v -> v.getRegistration().equalsIgnoreCase(registracija))
                     .findFirst();
 
-            if (vozilo.isPresent()) return vozilo.get();
-            System.out.println("Greska! Vozilo sa registracijom " + registracija + " ne postoji.");
+            if (vozilo.isPresent())
+            {
+                return vozilo.get();
+            }
+            log.info("Greska! Vozilo sa registracijom {} ne postoji.", registracija);
         }
     }
 
@@ -476,7 +480,7 @@ public class Main {
         while (true) {
             model = scanner.nextLine();
             if (model.equals("Bus") || model.equals("Tramvaj")) return model;
-            System.out.print("Greska! Pogresan tip vozila! Unesite tip vozila (Bus/Tramvaj): ");
+            log.info("Greska! Pogresan tip vozila! Unesite tip vozila (Bus/Tramvaj): ");
         }
     }
 
@@ -485,7 +489,7 @@ public class Main {
             try {
                 return unosGodina(scanner);
             } catch (PogresanUnosException | NegativniUnosException e) {
-                System.out.print(e.getMessage() + " Pokusajte ponovo: ");
+                log.info("{}, pokusajte ponovo: ",e.getMessage());
             }
         }
     }
@@ -494,7 +498,7 @@ public class Main {
      * Ispisuje listu svih vozila s pripadajućom dostupnošću.
      */
     private static void ispisiVozila(List<Vehicle> vehicles, List<Route> routes) {
-        System.out.println("=== VOZILA ===");
+        log.info("=== VOZILA ===");
         dostupnostVozila(vehicles, routes);
     }
 
@@ -502,10 +506,10 @@ public class Main {
      * Ispisuje sve linije u sustavu.
      */
     private static void ispisiLinije(List<Route> routes) {
-        System.out.println("=== LINIJE ===");
+        log.info("=== LINIJE ===");
         routes.forEach(route -> {
             route.ispis();
-            System.out.println();
+            log.info("");
         });
     }
 
@@ -515,7 +519,7 @@ public class Main {
     private static void pronadiKilometrazu(Scanner scanner, List<Route> routes) {
         int odabir;
         while (true) {
-            System.out.println("1) Najkraca linija\n2) Najduza linija\n3) Izlaz");
+            log.info("1) Najkraca linija\n2) Najduza linija\n3) Izlaz");
             odabir = scanner.nextInt();
             scanner.nextLine();
 
@@ -523,14 +527,14 @@ public class Main {
                 routes.stream()
                         .min(Comparator.comparing(Route::getKilometers))
                         .ifPresent(route -> {
-                            System.out.println("Najkraca linija: ");
+                            log.info("Najkraca linija: ");
                             route.ispis();
                         });
             } else if (odabir == 2) {
                 routes.stream()
                         .max(Comparator.comparing(Route::getKilometers))
                         .ifPresent(route -> {
-                            System.out.println("Najduza linija: ");
+                            log.info("Najduza linija: ");
                             route.ispis();
                         });
             } else if (odabir == 3) {
@@ -543,7 +547,7 @@ public class Main {
      * Pronalazi i ispisuje sve linije koje kreću s određenog polazišta.
      */
     private static void pronadiStanice(Scanner scanner, List<Route> routes) {
-        System.out.print("Unesite polaziste: ");
+        log.info("Unesite polaziste: ");
         String polaziste = scanner.nextLine();
 
         List<Route> pocetneStanice = routes.stream()
@@ -551,7 +555,7 @@ public class Main {
                 .toList();
 
         if (pocetneStanice.isEmpty()) {
-            System.out.println("Ne postoji linija koja krece iz stanice " + polaziste + ".");
+            log.info("Ne postoji linija koja krece iz stanice {}.", polaziste);
         } else {
             pocetneStanice.forEach(Route::ispis);
         }
@@ -561,7 +565,7 @@ public class Main {
      * Pronalazi i ispisuje sve linije koje koriste vozilo s određenom registracijom.
      */
     private static void pronadiRegistraciju(Scanner scanner, List<Route> routes, Map<String, Vehicle> mapaVozila) {
-        System.out.print("Unesite registraciju: ");
+        log.info("Unesite registraciju: ");
         String registracijavozila = scanner.nextLine();
 
         Optional<Vehicle> voziloOpt = Optional.ofNullable(mapaVozila.get(registracijavozila.toUpperCase()));
@@ -572,12 +576,12 @@ public class Main {
                     .toList();
 
             if (ruteZaVozilo.isEmpty()) {
-                System.out.println("Vozilo postoji, ali nema dodjeljenu liniju.");
+                log.info("Vozilo postoji, ali nema dodjeljenu liniju.");
                 vozilo.ispis();
             } else {
                 ruteZaVozilo.forEach(Route::ispis);
             }
-        }, () -> System.out.println("Vozilo sa registracijom " + registracijavozila + " ne postoji."));
+        }, () -> log.info("Vozilo sa registracijom {} ne postoji.", registracijavozila));
     }
 
     /**
@@ -586,7 +590,7 @@ public class Main {
     private static void pronadiGodinuProizvodnje(Scanner scanner, List<Vehicle> vehicles) {
         int odabir;
         while (true) {
-            System.out.println("1) Najnovije vozilo\n2) Najstarije vozilo\n3) Izlaz");
+            log.info("1) Najnovije vozilo\n2) Najstarije vozilo\n3) Izlaz");
             odabir = scanner.nextInt();
             scanner.nextLine();
 
@@ -594,14 +598,14 @@ public class Main {
                 vehicles.stream()
                         .max(Comparator.comparing(Vehicle::getYear))
                         .ifPresent(vehicle -> {
-                            System.out.println("=== Najnovije vozilo ===");
+                            log.info("=== Najnovije vozilo ===");
                             vehicle.ispis();
                         });
             } else if (odabir == 2) {
                 vehicles.stream()
                         .min(Comparator.comparing(Vehicle::getYear))
                         .ifPresent(vehicle -> {
-                            System.out.println("=== Najstarije vozilo ===");
+                            log.info("=== Najstarije vozilo ===");
                             vehicle.ispis();
                         });
             } else if (odabir == 3) {
@@ -628,7 +632,7 @@ public class Main {
                 .collect(Collectors.partitioningBy(vozilo ->
                         vozilo instanceof Elektricni && ((Elektricni) vozilo).jeElektricni()));
 
-        System.out.println("=== ELEKTRICNA VOZILA ===");
+        log.info("=== ELEKTRICNA VOZILA ===");
         Optional.ofNullable(elektricnaVozila.get(true)).ifPresent(lista ->
                 lista.forEach(Vehicle::ispis));
     }
