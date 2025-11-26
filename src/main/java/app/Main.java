@@ -208,6 +208,68 @@ public class Main {
     private static User login(Scanner scanner, User korisnik) {
         log.info("Unesite ime i prezime: ");
         String name = null;
+        name = unosIme(scanner, korisnik, name);
+
+        log.info("Broj godina: ");
+        int age;
+        age = unosGodine(scanner, korisnik);
+
+        log.info("Unesite username: ");
+        String nameID = null;
+        nameID = unosUsername(scanner, nameID);
+
+        log.info("Unesite email adresu: ");
+        String email = null;
+        email = unosEmail(scanner, korisnik, email);
+
+        return new User(name, age, nameID, email);
+    }
+
+    private static String unosEmail(Scanner scanner, User korisnik, String email) {
+        while (email == null) {
+            try {
+                email = scanner.nextLine();
+                if (email.isEmpty()) throw new PraznoException("Nedostaje email adresa.");
+                else if (!korisnik.provjeriMail(email)) {
+                    log.info("Pogresni format email adrese. Pokusajte ponovo: ");
+                    email = null;
+                }
+            } catch (PraznoException e) {
+                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
+                email = null;
+            }
+        }
+        return email;
+    }
+
+    private static String unosUsername(Scanner scanner, String nameID) {
+        while (nameID == null) {
+            try {
+                nameID = scanner.nextLine();
+                if (nameID.isEmpty()) throw new PraznoException("Nedostaje username.");
+            } catch (PraznoException _) {
+                log.info("Pogresno uneseni username. Pokusajte ponovo: ");
+                nameID = null;
+            }
+        }
+        return nameID;
+    }
+
+    private static int unosGodine(Scanner scanner, User korisnik) {
+        int age;
+        while (true) {
+            try {
+                age = validacijaGodine(scanner);
+                if (korisnik.provjeriGodine(age)) break;
+                else log.info("Pogresna godina (10-100). Pokusajte ponovo: ");
+            } catch (PogresanUnosException | NegativniUnosException e) {
+                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
+            }
+        }
+        return age;
+    }
+
+    private static String unosIme(Scanner scanner, User korisnik, String name) {
         while (name == null) {
             try {
                 name = scanner.nextLine();
@@ -222,54 +284,13 @@ public class Main {
                 name = null;
             }
         }
-
-        log.info("Broj godina: ");
-        int age;
-        while (true) {
-            try {
-                age = unosGodina(scanner);
-                if (korisnik.provjeriGodine(age)) break;
-                else log.info("Pogresna godina (10-100). Pokusajte ponovo: ");
-            } catch (PogresanUnosException | NegativniUnosException e) {
-                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
-            }
-        }
-
-        log.info("Unesite username: ");
-        String nameID = null;
-        while (nameID == null) {
-            try {
-                nameID = scanner.nextLine();
-                if (nameID.isEmpty()) throw new PraznoException("Nedostaje username.");
-            } catch (PraznoException _) {
-                log.info("Pogresno uneseni username. Pokusajte ponovo: ");
-                nameID = null;
-            }
-        }
-
-        log.info("Unesite email adresu: ");
-        String email = null;
-        while (email == null) {
-            try {
-                email = scanner.nextLine();
-                if (email.isEmpty()) throw new PraznoException("Nedostaje email adresa.");
-                else if (!korisnik.provjeriMail(email)) {
-                    log.info("Pogresni format email adrese. Pokusajte ponovo: ");
-                    email = null;
-                }
-            } catch (PraznoException e) {
-                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
-                email = null;
-            }
-        }
-
-        return new User(name, age, nameID, email);
+        return name;
     }
 
     /**
      * Omogućuje unos broja godina s validacijom.
      */
-    private static int unosGodina(Scanner scanner) throws PogresanUnosException {
+    private static int validacijaGodine(Scanner scanner) throws PogresanUnosException {
         try {
             int age = scanner.nextInt();
             scanner.nextLine();
@@ -490,7 +511,7 @@ public class Main {
     private static int unesiGodinu(Scanner scanner) {
         while (true) {
             try {
-                return unosGodina(scanner);
+                return validacijaGodine(scanner);
             } catch (PogresanUnosException | NegativniUnosException e) {
                 log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
             }
