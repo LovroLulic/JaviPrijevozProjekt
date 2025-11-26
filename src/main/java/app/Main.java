@@ -628,12 +628,11 @@ public class Main {
      * Pretrazuje elektricna vozila.
      */
     private static void podjelaNaElektricna(List<Vehicle> vehicles) {
-        Map<Boolean, List<Vehicle>> elektricnaVozila = vehicles.stream()
-                .collect(Collectors.partitioningBy(vozilo ->
-                        vozilo instanceof Elektricni && ((Elektricni) vozilo).jeElektricni()));
+        List<Vehicle>elektricnavozila=vehicles.stream()
+                        .filter(vozilo-> vozilo instanceof Elektricni elektricni && elektricni.jeElektricni())
+                                .toList();
 
         log.info("=== ELEKTRICNA VOZILA ===");
-        Optional.ofNullable(elektricnaVozila.get(true)).ifPresent(lista ->
-                lista.forEach(Vehicle::ispis));
+        elektricnavozila.forEach(Vehicle::ispis);
     }
 }

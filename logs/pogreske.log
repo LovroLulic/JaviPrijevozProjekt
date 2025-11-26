@@ -2143,3 +2143,36 @@ Pretrazivanje po:
 2025-11-26 14:57:00,850 INFO [main] app.Main [Main.java:94] 3) Izlaz
 2025-11-26 14:57:02,140 INFO [main] app.Main [Main.java:153] Hvala na koristenju!
 2025-11-26 14:57:02,141 INFO [main] app.Main [Main.java:159] Program zatvoren.
+2025-11-26 15:20:56,999 INFO [main] app.Main [Main.java:27] Pokrenut program!
+2025-11-26 15:20:57,028 INFO [main] app.Main [Main.java:206] Unesite ime i prezime: 
+2025-11-26 15:21:00,944 INFO [main] app.Main [Main.java:223] Broj godina: 
+2025-11-26 15:21:01,875 INFO [main] app.Main [Main.java:235] Unesite username: 
+2025-11-26 15:21:03,470 INFO [main] app.Main [Main.java:247] Unesite email adresu: 
+2025-11-26 15:21:06,798 INFO [main] app.Main [Main.java:87] Korisnik Lovro Lulic (llulic, 20) je prijavljen.
+2025-11-26 15:21:06,800 INFO [main] app.Main [Main.java:88] 
+Dobrodosao Lovro Lulic (llulic, 20)
+2025-11-26 15:21:06,800 INFO [main] app.Main [Main.java:92] 
+1) Unos vozila i linije
+2025-11-26 15:21:06,800 INFO [main] app.Main [Main.java:93] 2) Pretrazivanje
+2025-11-26 15:21:06,800 INFO [main] app.Main [Main.java:94] 3) Izlaz
+2025-11-26 15:21:09,248 INFO [main] app.Main [Main.java:128] 
+Pretrazivanje po:
+2025-11-26 15:21:09,248 INFO [main] app.Main [Main.java:129] 1) Registracija
+2025-11-26 15:21:09,248 INFO [main] app.Main [Main.java:130] 2) Polaziste
+2025-11-26 15:21:09,248 INFO [main] app.Main [Main.java:131] 3) Kilometraza
+2025-11-26 15:21:09,249 INFO [main] app.Main [Main.java:132] 4) Prikaz linija
+2025-11-26 15:21:09,249 INFO [main] app.Main [Main.java:133] 5) Vozila
+2025-11-26 15:21:09,249 INFO [main] app.Main [Main.java:134] 6) Godine Proizvodnje
+2025-11-26 15:21:09,249 INFO [main] app.Main [Main.java:135] 7) Elektricna
+2025-11-26 15:21:09,249 INFO [main] app.Main [Main.java:136] 8) Izlaz
+2025-11-26 15:21:10,884 INFO [main] app.Main [Main.java:635] === ELEKTRICNA VOZILA ===
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:128] 
+Pretrazivanje po:
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:129] 1) Registracija
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:130] 2) Polaziste
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:131] 3) Kilometraza
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:132] 4) Prikaz linija
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:133] 5) Vozila
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:134] 6) Godine Proizvodnje
+2025-11-26 15:21:10,886 INFO [main] app.Main [Main.java:135] 7) Elektricna
+2025-11-26 15:21:10,887 INFO [main] app.Main [Main.java:136] 8) Izlaz
