@@ -336,7 +336,7 @@ public class Main {
     /**
      * Upravlja procesom dodavanja novih linija u sustav.
      */
-    private static void procesDodavanjaLinije(List<Route> routes, Scanner scanner, List<Vehicle> vehicles, CijenaKarte cjenik) {
+    private static void procesDodavanjaLinije(List<? super Route> routes, Scanner scanner, List<Vehicle> vehicles, CijenaKarte cjenik) {
         try {
             log.info("Koliko novih linija zelite dodati? ");
             int brojLinijaZaDodavanje = scanner.nextInt();
@@ -356,7 +356,7 @@ public class Main {
     /**
      * Upravlja procesom dodavanja novih vozila u sustav.
      */
-    private static void procesDodavanjaVozila(List<Vehicle> vehicles, Scanner scanner, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
+    private static void procesDodavanjaVozila(List<? super Vehicle> vehicles, Scanner scanner, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
         try {
             log.info("Koliko novih vozila zelite dodati? ");
             int brojVozilaZaDodavanje = scanner.nextInt();
@@ -377,7 +377,7 @@ public class Main {
      * Obavlja unos podataka za nove linije.
      */
     private static void dodavanjeLinija(int brojLinijaZaDodavanje, Scanner scanner, List<Vehicle> vehicles,
-                                        List<Route> routes, CijenaKarte cjenik) {
+                                        List<? super Route> routes, CijenaKarte cjenik) {
         for (int i = 0; i < brojLinijaZaDodavanje; i++) {
             log.info("Pocetna stanica: ");
             String pocetnastanica = unesiNePrazno(scanner, "pocetna stanica");
@@ -412,7 +412,7 @@ public class Main {
      * Obavlja unos podataka za nova vozila.
      */
     private static void dodavanjeVozila(int brojVozilaZaDodavanje, Scanner scanner,
-                                        List<Vehicle> vehicles, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
+                                        List<? super Vehicle> vehicles, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
         for (int i = 0; i < brojVozilaZaDodavanje; i++) {
             log.info("Unesite registraciju: ");
             String registration = scanner.nextLine();
@@ -614,7 +614,7 @@ public class Main {
     /**
      * Pronalazi i ispisuje najnovije i najstarije vozilo u sustavu.
      */
-    private static void pronadiGodinuProizvodnje(Scanner scanner, List<Vehicle> vehicles) {
+    private static void pronadiGodinuProizvodnje(Scanner scanner, List<? extends Vehicle> vehicles) {
         int odabir;
         while (true) {
             log.info("1) Najnovije vozilo\n2) Najstarije vozilo\n3) Izlaz");
@@ -644,7 +644,7 @@ public class Main {
     /**
      * Popunjuje mapu vozila.
      */
-    private static void popuniMapuVozilima(Map<String, Vehicle> mapaVozila, List<Vehicle> vehicles) {
+    private static void popuniMapuVozilima(Map<String, Vehicle> mapaVozila, List<? extends Vehicle> vehicles) {
         mapaVozila.clear();
         for (Vehicle vozilo : vehicles) {
             mapaVozila.put(vozilo.getRegistration(), vozilo);
