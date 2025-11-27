@@ -111,7 +111,7 @@ public class Main {
                     odabir = scanner.nextInt();
                     scanner.nextLine();
                     switch (odabir) {
-                        case 1 -> procesDodavanjaVozila(vehicles, scanner, registracije);
+                        case 1 -> procesDodavanjaVozila(vehicles, scanner, registracije, mapaVozila);
                         case 2 -> procesDodavanjaLinije(routes, scanner, vehicles, cjenik);
                         case 3 -> odabir=3;
                         default -> log.info("Nedozvoljeni odabir.");
@@ -356,7 +356,7 @@ public class Main {
     /**
      * Upravlja procesom dodavanja novih vozila u sustav.
      */
-    private static void procesDodavanjaVozila(List<Vehicle> vehicles, Scanner scanner, Set<String> registracije) {
+    private static void procesDodavanjaVozila(List<Vehicle> vehicles, Scanner scanner, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
         try {
             log.info("Koliko novih vozila zelite dodati? ");
             int brojVozilaZaDodavanje = scanner.nextInt();
@@ -366,7 +366,7 @@ public class Main {
                 throw new NegativniUnosException("Broj vozila ne smije biti negativan.");
             }
 
-            dodavanjeVozila(brojVozilaZaDodavanje, scanner, vehicles, registracije);
+            dodavanjeVozila(brojVozilaZaDodavanje, scanner, vehicles, registracije, mapaVozila);
         } catch (NegativniUnosException e) {
             log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
             scanner.nextLine();
@@ -412,7 +412,7 @@ public class Main {
      * Obavlja unos podataka za nova vozila.
      */
     private static void dodavanjeVozila(int brojVozilaZaDodavanje, Scanner scanner,
-                                        List<Vehicle> vehicles, Set<String> registracije) {
+                                        List<Vehicle> vehicles, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
         for (int i = 0; i < brojVozilaZaDodavanje; i++) {
             log.info("Unesite registraciju: ");
             String registration = scanner.nextLine();
@@ -433,13 +433,17 @@ public class Main {
             int year = unesiGodinuProizvodnje(scanner);
             scanner.nextLine();
 
+            Vehicle novoVozilo;
             if (model.equals("Bus")) {
-                vehicles.add(new Bus(registration, color, year));
+                novoVozilo= new Bus(registration, color, year);
+                vehicles.add(novoVozilo);
             } else {
-                vehicles.add(new Tramvaj(registration, color, year));
+                novoVozilo=new Tramvaj(registration, color, year);
+                vehicles.add(novoVozilo);
             }
 
             registracije.add(registration.toLowerCase());
+            mapaVozila.put(registration.toUpperCase(), novoVozilo);
             log.info("Uspjesno dodano vozilo.");
         }
     }
