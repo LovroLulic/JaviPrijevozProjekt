@@ -113,7 +113,6 @@ public class Main {
                     switch (odabir) {
                         case 1 -> procesDodavanjaVozila(vehicles, scanner, registracije, mapaVozila);
                         case 2 -> procesDodavanjaLinije(routes, scanner, vehicles, cjenik);
-                        case 3 -> odabir=3;
                         default -> log.info("Nedozvoljeni odabir.");
                     }
                 }
@@ -146,7 +145,6 @@ public class Main {
                         case 5 -> ispisiVozila(vehicles, routes);
                         case 6 -> pronadiGodinuProizvodnje(scanner, vehicles);
                         case 7 -> podjelaNaElektricna(vehicles);
-                        case 8 -> odabir=8;
                         default -> log.info("Nedozvoljeni odabir.");
                     }
                 }
@@ -448,7 +446,7 @@ public class Main {
         }
     }
 
-    // Pomoćne metode za unos podataka
+    // Pomocna metoda za unos podataka
     private static String unesiNePrazno(Scanner scanner, String naziv) {
         String unos;
         while (true) {
@@ -540,29 +538,30 @@ public class Main {
      * Pronalazi i ispisuje linije s najvećom i najmanjom kilometražom.
      */
     private static void pronadiKilometrazu(Scanner scanner, List<Route> routes) {
-        int odabir;
-        while (true) {
+        int odabir=0;
+        while (odabir!=3) {
             log.info("1) Najkraca linija\n2) Najduza linija\n3) Izlaz");
             odabir = scanner.nextInt();
             scanner.nextLine();
 
-            if (odabir == 1) {
-                routes.stream()
-                        .min(Comparator.comparing(Route::getKilometers))
-                        .ifPresent(route -> {
-                            log.info("Najkraca linija: ");
-                            route.ispis();
-                        });
-            } else if (odabir == 2) {
-                routes.stream()
-                        .max(Comparator.comparing(Route::getKilometers))
-                        .ifPresent(route -> {
-                            log.info("Najduza linija: ");
-                            route.ispis();
-                        });
-            } else if (odabir == 3) {
-                break;
+            switch(odabir){
+                case 1->
+                        routes.stream()
+                                .min(Comparator.comparing(Route::getKilometers))
+                                .ifPresent(route -> {
+                                    log.info("Najkraca linija: ");
+                                    route.ispis();
+                                });
+                case 2->
+                        routes.stream()
+                                .max(Comparator.comparing(Route::getKilometers))
+                                .ifPresent(route -> {
+                                    log.info("Najduza linija: ");
+                                    route.ispis();
+                                });
+                default->log.info("Krivi unos.");
             }
+
         }
     }
 
@@ -599,15 +598,15 @@ public class Main {
 
         }
 
-        List<Route>ruteZaVozilo=routes.stream()
+        List<Route>rutaZaVozilo=routes.stream()
                 .filter(ruta -> ruta.getVehicle().getRegistration().equalsIgnoreCase(registracijavozila))
                 .toList();
 
-        if(ruteZaVozilo.isEmpty()){
+        if(rutaZaVozilo.isEmpty()){
             log.info("Vozilo postoji, ali nema dodjeljenu liniju.");
             vozilo.ispis();
         } else{
-            ruteZaVozilo.forEach(Route::ispis);
+            rutaZaVozilo.forEach(Route::ispis);
         }
     }
 
@@ -615,28 +614,28 @@ public class Main {
      * Pronalazi i ispisuje najnovije i najstarije vozilo u sustavu.
      */
     private static void pronadiGodinuProizvodnje(Scanner scanner, List<? extends Vehicle> vehicles) {
-        int odabir;
-        while (true) {
+        int odabir=0;
+        while (odabir!=3) {
             log.info("1) Najnovije vozilo\n2) Najstarije vozilo\n3) Izlaz");
             odabir = scanner.nextInt();
             scanner.nextLine();
 
-            if (odabir == 1) {
-                vehicles.stream()
+            switch(odabir){
+                case 1 ->
+                        vehicles.stream()
                         .max(Comparator.comparing(Vehicle::getYear))
                         .ifPresent(vehicle -> {
                             log.info("=== Najnovije vozilo ===");
                             vehicle.ispis();
                         });
-            } else if (odabir == 2) {
-                vehicles.stream()
-                        .min(Comparator.comparing(Vehicle::getYear))
-                        .ifPresent(vehicle -> {
-                            log.info("=== Najstarije vozilo ===");
-                            vehicle.ispis();
-                        });
-            } else if (odabir == 3) {
-                break;
+                case 2 ->
+                        vehicles.stream()
+                                .min(Comparator.comparing(Vehicle::getYear))
+                                .ifPresent(vehicle -> {
+                                    log.info("=== Najstarije vozilo ===");
+                                    vehicle.ispis();
+                                });
+                default -> log.info("Krivi unos.");
             }
         }
     }
@@ -655,9 +654,10 @@ public class Main {
      * Pretrazuje elektricna vozila.
      */
     private static void podjelaNaElektricna(List<Vehicle> vehicles) {
+
         List<Vehicle>elektricnaVozila=vehicles.stream()
                         .filter(vozilo-> (vozilo instanceof Elektricni e) && e.jeElektricni())
-                                .toList();
+                        .toList();
 
         log.info("=== ELEKTRICNA VOZILA ===");
         elektricnaVozila.forEach(Vehicle::ispis);
