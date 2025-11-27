@@ -161,6 +161,10 @@ public class Main {
 
     /**
      * Provjerava da li je vozilo trenutno korišteno na nekoj od ruta.
+     *
+     * @param v vozilo za koje se provjerava dostupnost
+     * @param routes lista svih ruta u sustavu
+     * @return indeks rute na kojoj je vozilo korišteno ili -1 ako je dostupno
      */
     static int isVehicleUsed(Vehicle v, List<Route> routes) {
         if (v == null) return -1;
@@ -175,7 +179,10 @@ public class Main {
     }
 
     /**
-     * Ispisuje dostupnost svih vozila u sustavu.
+     * Ispisuje dostupnost svih vozila u sustavu grupiranu po statusu dostupnosti.
+     *
+     * @param vehicles lista vozila za prikaz dostupnosti
+     * @param routes lista ruta za provjeru korištenja vozila
      */
     static void dostupnostVozila(List<? extends Vehicle> vehicles, List<Route> routes) {
         Map<Boolean, List<Vehicle>> vozilaPoDostupnosti = vehicles.stream()
@@ -200,6 +207,10 @@ public class Main {
 
     /**
      * Obavlja proces prijave korisnika u sustav.
+     *
+     * @param scanner Scanner objekt za unos podataka
+     * @param korisnik privremeni User objekt za validaciju unosa
+     * @return potpuno popunjen User objekt s korisničkim podacima
      */
     private static User login(Scanner scanner, User korisnik) {
         log.info("Unesite ime i prezime: ");
@@ -284,7 +295,12 @@ public class Main {
     }
 
     /**
-     * Omogućuje unos broja godina s validacijom.
+     * Omogućuje unos broja godina s validacijom formata.
+     *
+     * @param scanner Scanner objekt za unos podataka
+     * @return uneseni broj godina
+     * @throws PogresanUnosException ako unos nije cijeli broj
+     * @throws NegativniUnosException ako je unesena negativna vrijednost
      */
     private static int validacijaGodine(Scanner scanner) throws PogresanUnosException {
         try {
@@ -298,7 +314,11 @@ public class Main {
     }
 
     /**
-     * Omogućuje unos datuma u formatu dd.MM.yyyy.
+     * Omogućuje unos datuma u specifičnom formatu.
+     *
+     * @param scanner Scanner objekt za unos podataka
+     * @return parsirani LocalDate objekt
+     * @throws PogresanDatumException ako format datuma nije ispravan
      */
     private static LocalDate unosDatum(Scanner scanner) throws PogresanDatumException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -312,6 +332,10 @@ public class Main {
 
     /**
      * Provjerava administratorske ovlasti korisnika.
+     *
+     * @param korisnik User objekt za provjeru identiteta
+     * @param scanner Scanner objekt za unos lozinke
+     * @return true ako korisnik nema administratorske ovlasti, false inače
      */
     private static boolean provjeraAdmin(User korisnik, Scanner scanner) {
         if (!korisnik.getNameID().equals("llulic")) {
@@ -333,6 +357,11 @@ public class Main {
 
     /**
      * Upravlja procesom dodavanja novih linija u sustav.
+     *
+     * @param routes lista ruta u koju se dodaju nove linije
+     * @param scanner Scanner objekt za unos podataka
+     * @param vehicles lista vozila za dodjelu novim linijama
+     * @param cjenik cjenik karata za izračun cijena
      */
     private static void procesDodavanjaLinije(List<? super Route> routes, Scanner scanner, List<Vehicle> vehicles, CijenaKarte cjenik) {
         try {
@@ -353,6 +382,11 @@ public class Main {
 
     /**
      * Upravlja procesom dodavanja novih vozila u sustav.
+     *
+     * @param vehicles lista vozila u koju se dodaju nova vozila
+     * @param scanner Scanner objekt za unos podataka
+     * @param registracije skup postojećih registracija za provjeru jedinstvenosti
+     * @param mapaVozila mapa vozila za ažuriranje
      */
     private static void procesDodavanjaVozila(List<? super Vehicle> vehicles, Scanner scanner, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
         try {
@@ -373,6 +407,12 @@ public class Main {
 
     /**
      * Obavlja unos podataka za nove linije.
+     *
+     * @param brojLinijaZaDodavanje broj linija koje treba dodati
+     * @param scanner Scanner objekt za unos podataka
+     * @param vehicles lista vozila za dodjelu linijama
+     * @param routes lista ruta za dodavanje novih linija
+     * @param cjenik cjenik karata za izračun cijena
      */
     private static void dodavanjeLinija(int brojLinijaZaDodavanje, Scanner scanner, List<Vehicle> vehicles,
                                         List<? super Route> routes, CijenaKarte cjenik) {
@@ -407,7 +447,13 @@ public class Main {
     }
 
     /**
-     * Obavlja unos podataka za nova vozila.
+     * Obavlja unos podataka za nova vozila i dodaje ih u sustav.
+     *
+     * @param brojVozilaZaDodavanje broj vozila koja treba dodati u sustav
+     * @param scanner Scanner objekt za unos korisničkih podataka
+     * @param vehicles lista vozila u koju se dodaju nova vozila
+     * @param registracije skup registracijskih oznaka za provjeru jedinstvenosti
+     * @param mapaVozila mapa vozila koja se ažurira novim vozilima
      */
     private static void dodavanjeVozila(int brojVozilaZaDodavanje, Scanner scanner,
                                         List<? super Vehicle> vehicles, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
@@ -482,6 +528,13 @@ public class Main {
         }
     }
 
+    /**
+     * Pronalazi vozilo po registracijskoj oznaci.
+     *
+     * @param scanner Scanner objekt za unos registracije
+     * @param vehicles lista vozila za pretragu
+     * @return pronađeno vozilo ili null ako ne postoji
+     */
     private static Vehicle pronadiVoziloPoRegistraciji(Scanner scanner, List<Vehicle> vehicles) {
         while (true) {
             log.info("Unesite registraciju vozila: ");
@@ -535,7 +588,11 @@ public class Main {
     }
 
     /**
-     * Pronalazi i ispisuje linije s najvećom i najmanjom kilometražom.
+     * Pronalazi i ispisuje linije s najvećom ili najmanjom kilometražom.
+     * Korisnik bira želi li vidjeti najkraću ili najdužu liniju.
+     *
+     * @param scanner Scanner objekt za unos korisničkog izbora
+     * @param routes lista ruta za analizu kilometraže
      */
     private static void pronadiKilometrazu(Scanner scanner, List<Route> routes) {
         int odabir=0;
@@ -567,6 +624,10 @@ public class Main {
 
     /**
      * Pronalazi i ispisuje sve linije koje kreću s određenog polazišta.
+     * Pretraga nije osjetljiva na velika i mala slova.
+     *
+     * @param scanner Scanner objekt za unos naziva polazišta
+     * @param routes lista ruta za pretragu
      */
     private static void pronadiStanice(Scanner scanner, List<Route> routes) {
         log.info("Unesite polaziste: ");
@@ -585,6 +646,10 @@ public class Main {
 
     /**
      * Pronalazi i ispisuje sve linije koje koriste vozilo s određenom registracijom.
+     *
+     * @param scanner Scanner objekt za unos registracije
+     * @param routes lista ruta za pretragu
+     * @param mapaVozila mapa vozila za brzo pronalaženje
      */
     private static void pronadiRegistraciju(Scanner scanner, List<Route> routes, Map<String, Vehicle> mapaVozila) {
         log.info("Unesite registraciju: ");
@@ -611,7 +676,11 @@ public class Main {
     }
 
     /**
-     * Pronalazi i ispisuje najnovije i najstarije vozilo u sustavu.
+     * Pronalazi i ispisuje najnovije ili najstarije vozilo u sustavu.
+     * Korisnik bira želi li vidjeti najnovije ili najstarije vozilo.
+     *
+     * @param scanner Scanner objekt za unos korisničkog izbora
+     * @param vehicles lista vozila za pretragu
      */
     private static void pronadiGodinuProizvodnje(Scanner scanner, List<? extends Vehicle> vehicles) {
         int odabir=0;
@@ -641,7 +710,10 @@ public class Main {
     }
 
     /**
-     * Popunjuje mapu vozila.
+     * Popunjuje mapu vozila registracijskim oznakama kao ključevima.
+     *
+     * @param mapaVozila mapa za popunjavanje
+     * @param vehicles lista vozila za dodavanje u mapu
      */
     private static void popuniMapuVozilima(Map<String, Vehicle> mapaVozila, List<? extends Vehicle> vehicles) {
         mapaVozila.clear();
@@ -651,7 +723,9 @@ public class Main {
     }
 
     /**
-     * Pretrazuje elektricna vozila.
+     * Filtrira i prikazuje samo električna vozila iz liste.
+     *
+     * @param vehicles lista svih vozila za filtriranje
      */
     private static void podjelaNaElektricna(List<Vehicle> vehicles) {
 
