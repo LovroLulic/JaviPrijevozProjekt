@@ -102,7 +102,7 @@ public class Main {
             if (odabir == 1) {
                 if (provjeraAdmin(korisnik, scanner)) continue;
 
-                while (true) {
+                while (odabir!=3) {
                     log.info("\n=== UNOS VOZILA I LINIJA ===");
                     log.info("Trenutno stanje vozila: {}", vehicles.size());
                     log.info("Trenutno stanje linija: {}", routes.size());
@@ -110,13 +110,11 @@ public class Main {
 
                     odabir = scanner.nextInt();
                     scanner.nextLine();
-
-                    if (odabir == 1) {
-                        procesDodavanjaVozila(vehicles, scanner, registracije);
-                    } else if (odabir == 2) {
-                        procesDodavanjaLinije(routes, scanner, vehicles, cjenik);
-                    } else if (odabir == 3) {
-                        break;
+                    switch (odabir) {
+                        case 1 -> procesDodavanjaVozila(vehicles, scanner, registracije);
+                        case 2 -> procesDodavanjaLinije(routes, scanner, vehicles, cjenik);
+                        case 3 -> odabir=3;
+                        default -> log.info("Nedozvoljeni odabir.");
                     }
                 }
             } else if (odabir == 2) {
@@ -125,8 +123,8 @@ public class Main {
                     continue;
                 }
 
-                int odabir2=0;
-                while (odabir2!=8) {
+
+                while (odabir!=8) {
                     log.info("\nPretrazivanje po:");
                     log.info("1) Registracija");
                     log.info("2) Polaziste");
@@ -137,10 +135,10 @@ public class Main {
                     log.info("7) Elektricna");
                     log.info("8) Izlaz");
 
-                    odabir2 = scanner.nextInt();
+                    odabir = scanner.nextInt();
                     scanner.nextLine();
 
-                    switch (odabir2) {
+                    switch (odabir) {
                         case 1 -> pronadiRegistraciju(scanner, routes, mapaVozila);
                         case 2 -> pronadiStanice(scanner, routes);
                         case 3 -> pronadiKilometrazu(scanner, routes);
@@ -148,7 +146,7 @@ public class Main {
                         case 5 -> ispisiVozila(vehicles, routes);
                         case 6 -> pronadiGodinuProizvodnje(scanner, vehicles);
                         case 7 -> podjelaNaElektricna(vehicles);
-                        case 8 -> odabir2=8;
+                        case 8 -> odabir=8;
                         default -> log.info("Nedozvoljeni odabir.");
                     }
                 }
@@ -432,7 +430,7 @@ public class Main {
             String color = scanner.nextLine();
 
             log.info("Unesite godinu proizvodnje: ");
-            int year = unesiGodinu(scanner);
+            int year = unesiGodinuProizvodnje(scanner);
             scanner.nextLine();
 
             if (model.equals("Bus")) {
@@ -508,7 +506,7 @@ public class Main {
         }
     }
 
-    private static int unesiGodinu(Scanner scanner) {
+    private static int unesiGodinuProizvodnje(Scanner scanner) {
         while (true) {
             try {
                 return validacijaGodine(scanner);
@@ -531,10 +529,7 @@ public class Main {
      */
     private static void ispisiLinije(List<Route> routes) {
         log.info("=== LINIJE ===");
-        routes.forEach(route -> {
-            route.ispis();
-            log.info("");
-        });
+        routes.forEach(Route::ispis);
     }
 
     /**
@@ -590,22 +585,26 @@ public class Main {
      */
     private static void pronadiRegistraciju(Scanner scanner, List<Route> routes, Map<String, Vehicle> mapaVozila) {
         log.info("Unesite registraciju: ");
-        String registracijavozila = scanner.nextLine();
+        String registracijavozila = scanner.nextLine().toUpperCase();
 
-        Optional<Vehicle> voziloOpt = Optional.ofNullable(mapaVozila.get(registracijavozila.toUpperCase()));
+        Vehicle vozilo =mapaVozila.get(registracijavozila);
 
-        voziloOpt.ifPresentOrElse(vozilo -> {
-            List<Route> ruteZaVozilo = routes.stream()
-                    .filter(ruta -> registracijavozila.equalsIgnoreCase(ruta.getVehicle().getRegistration()))
-                    .toList();
+        if(vozilo==null){
+            log.info("Vozilo sa registracijom {} ne postoji.", registracijavozila);
+            return;
 
-            if (ruteZaVozilo.isEmpty()) {
-                log.info("Vozilo postoji, ali nema dodjeljenu liniju.");
-                vozilo.ispis();
-            } else {
-                ruteZaVozilo.forEach(Route::ispis);
-            }
-        }, () -> log.info("Vozilo sa registracijom {} ne postoji.", registracijavozila));
+        }
+
+        List<Route>ruteZaVozilo=routes.stream()
+                .filter(ruta -> ruta.getVehicle().getRegistration().equalsIgnoreCase(registracijavozila))
+                .toList();
+
+        if(ruteZaVozilo.isEmpty()){
+            log.info("Vozilo postoji, ali nema dodjeljenu liniju.");
+            vozilo.ispis();
+        } else{
+            ruteZaVozilo.forEach(Route::ispis);
+        }
     }
 
     /**
@@ -652,11 +651,11 @@ public class Main {
      * Pretrazuje elektricna vozila.
      */
     private static void podjelaNaElektricna(List<Vehicle> vehicles) {
-        List<Vehicle>elektricnavozila=vehicles.stream()
-                        .filter(vozilo-> vozilo instanceof Elektricni elektricni && elektricni.jeElektricni())
+        List<Vehicle>elektricnaVozila=vehicles.stream()
+                        .filter(vozilo-> (vozilo instanceof Elektricni e) && e.jeElektricni())
                                 .toList();
 
         log.info("=== ELEKTRICNA VOZILA ===");
-        elektricnavozila.forEach(Vehicle::ispis);
+        elektricnaVozila.forEach(Vehicle::ispis);
     }
 }
