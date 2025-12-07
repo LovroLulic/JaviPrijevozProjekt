@@ -1,739 +1,301 @@
 package app;
+
 import entities.*;
+import services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.math.BigDecimal;
 import java.util.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.stream.Collectors;
 
 /**
- * Predstavlja početnu točku sustava za upravljanje javnim prijevozom.
- * Upravlja korisničkom autentifikacijom, navigacijom kroz izbornike i koordinacijom između vozila i ruta.
+ * Glavna klasa aplikacije za upravljanje sustavom javnog prijevoza.
+ * Koordinira interakciju između korisnika, vozila, ruta i cjenika.
+ * Pruža korisničko sučelje s mogućnostima unosa podataka i pretraživanja.
  *
  * @author Lovro Lulic
  * @version 1.0
  */
-
 public class Main {
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
-    private static final String GRESKA_POKUSAJTE_PONOVO ="{} Pokusajte ponovo:";
-
-    static Logger log = LoggerFactory.getLogger(Main.class);
-
+    /**
+     * Glavna metoda koja pokreće aplikaciju.
+     * Inicijalizira sve potrebne komponente, prikazuje korisničko sučelje
+     * i upravlja glavnom navigacijom kroz program.
+     *
+     * @param args argumenti komandne linije (ne koriste se)
+     */
     public static void main(String[] args) {
-        log.trace("POCETAK - main metoda");
-        log.info("Pokrenut program!");
-
+        log.info("Program pokrenut");
         Scanner scanner = new Scanner(System.in);
 
-        User korisnik = new User("", 0, "", "");
-        List<Vehicle> vehicles = new ArrayList<>();
-        Set<String> registracije = new HashSet<>();
-        Map<String, Vehicle> mapaVozila = new HashMap<>();
-        List<Route> routes = new ArrayList<>();
-
-        // Inicijalizacija vozila
-        vehicles.add(new Tramvaj("ZG19055A", "Plava", 2019));
-        registracije.add("ZG19055A".toLowerCase());
-        vehicles.add(new Bus("ZG23045B", "Plava", 2012));
-        registracije.add("ZG23045B".toLowerCase());
-        vehicles.add(new Tramvaj("ZG01045C", "Bijela", 2023));
-        registracije.add("ZG01045C".toLowerCase());
-        vehicles.add(new Bus("ZG01045D", "Bijela", 2023));
-        registracije.add("ZG01045D".toLowerCase());
-        vehicles.add(new Bus("ZG01045E", "Zelena", 2023));
-        registracije.add("ZG01045E".toLowerCase());
-        vehicles.add(new Tramvaj("ZG01045F", "Roza", 2023));
-        registracije.add("ZG01045F".toLowerCase());
-        vehicles.add(new Bus("ZG01045G", "Crvena", 2023));
-        registracije.add("ZG01045G".toLowerCase());
-
-        popuniMapuVozilima(mapaVozila, vehicles);
-
+        // Setup
+        VozilaManager vozila = new VozilaManager();
+        RuteManager rute = new RuteManager(vozila);
+        KorisnikManager korisnici = new KorisnikManager();
         CijenaKarte cjenik = new CijenaKarte(
                 new BigDecimal("2.00"), new BigDecimal("1.00"), new BigDecimal("1.5"),
                 new BigDecimal("4.5"), new BigDecimal("2.5"), new BigDecimal("3")
         );
 
-        // Inicijalizacija ruta
-        routes.add(Route.builder(vehicles.getFirst(), LocalDate.of(2025, 12, 23))
-                .time("19:04")
-                .pocetnastanica("Velika Gorica")
-                .krajnastanica("Aerodrom")
-                .kilometers(new BigDecimal("6.24"))
-                .cjenik(cjenik)
-                .build());
+        // Početni podaci
+        vozila.dodajPocetnaVozila();
+        rute.dodajPocetneRute(cjenik);
 
-        routes.add(Route.builder(vehicles.get(2), LocalDate.of(2025, 9, 12))
-                .time("18:45")
-                .pocetnastanica("Glavni Kolodvor")
-                .krajnastanica("Vrapce")
-                .kilometers(new BigDecimal("8.5"))
-                .cjenik(cjenik)
-                .build());
+        // Login
+        User korisnik = korisnici.login(scanner);
+        log.info("Dobrodošao {}!", korisnik.getName());
 
-        routes.add(Route.builder(vehicles.get(5), LocalDate.of(2026, 1, 30))
-                .time("09:20")
-                .pocetnastanica("Prisavlje")
-                .krajnastanica("Mihaljevac")
-                .kilometers(new BigDecimal("7.5"))
-                .cjenik(cjenik)
-                .build());
-
-        // Login korisnika
-        korisnik = login(scanner, korisnik);
-        log.info("Korisnik {} ({}, {}) je prijavljen.", korisnik.getName(), korisnik.getNameID(), korisnik.getAge());
-        log.info("\nDobrodosao {} ({}, {})", korisnik.getName(), korisnik.getNameID(), korisnik.getAge());
-
-        // Glavni menu
+        // Glavna petlja
+        int izbor;
         do {
-            log.info("\n1) Unos vozila i linije");
-            log.info("2) Pretrazivanje");
+            log.info("\n=== GLAVNI MENU ===");
+            log.info("1) Unos podataka");
+            log.info("2) Pretraživanje");
             log.info("3) Izlaz");
+            log.info("Odabir: ");
 
-            int odabir = scanner.nextInt();
+            izbor = scanner.nextInt();
             scanner.nextLine();
-            log.trace("Korisnicki odabir: {}", odabir);
 
-            if (odabir == 1) {
-                if (provjeraAdmin(korisnik, scanner)) continue;
-
-                while (odabir!=3) {
-                    log.info("\n=== UNOS VOZILA I LINIJA ===");
-                    log.info("Trenutno stanje vozila: {}", vehicles.size());
-                    log.info("Trenutno stanje linija: {}", routes.size());
-                    log.info("\n1) Unos novog vozila\n2) Unos novih linija\n3) Izlaz");
-
-                    odabir = scanner.nextInt();
-                    scanner.nextLine();
-                    switch (odabir) {
-                        case 1 -> procesDodavanjaVozila(vehicles, scanner, registracije, mapaVozila);
-                        case 2 -> procesDodavanjaLinije(routes, scanner, vehicles, cjenik);
-                        default -> log.info("Nedozvoljeni odabir.");
-                    }
-                }
-            } else if (odabir == 2) {
-                if (routes.isEmpty()) {
-                    log.info("Nema vozila i linija.");
-                    continue;
-                }
-
-
-                while (odabir!=8) {
-                    log.info("\nPretrazivanje po:");
-                    log.info("1) Registracija");
-                    log.info("2) Polaziste");
-                    log.info("3) Kilometraza");
-                    log.info("4) Prikaz linija");
-                    log.info("5) Vozila");
-                    log.info("6) Godine Proizvodnje");
-                    log.info("7) Elektricna");
-                    log.info("8) Izlaz");
-
-                    odabir = scanner.nextInt();
-                    scanner.nextLine();
-
-                    switch (odabir) {
-                        case 1 -> pronadiRegistraciju(scanner, routes, mapaVozila);
-                        case 2 -> pronadiStanice(scanner, routes);
-                        case 3 -> pronadiKilometrazu(scanner, routes);
-                        case 4 -> ispisiLinije(routes);
-                        case 5 -> ispisiVozila(vehicles, routes);
-                        case 6 -> pronadiGodinuProizvodnje(scanner, vehicles);
-                        case 7 -> podjelaNaElektricna(vehicles);
-                        default -> log.info("Nedozvoljeni odabir.");
-                    }
-                }
-            } else if (odabir == 3) {
-                log.info("Hvala na koristenju!");
-                break;
+            switch(izbor) {
+                case 1 -> menuUnos(scanner, korisnik, vozila, rute, korisnici, cjenik);
+                case 2 -> menuPretraga(scanner, vozila, rute);
+                case 3 -> log.info("Hvala i doviđenja!");
+                default -> log.info("Krivi odabir!");
             }
-        } while (true);
+        } while(izbor != 3);
 
         scanner.close();
-        log.info("Program zatvoren.");
-        log.trace("KRAJ - main metoda");
+        log.info("Program završen");
     }
 
     /**
-     * Provjerava da li je vozilo trenutno korišteno na nekoj od ruta.
+     * Prikazuje i upravlja podizbornikom za unos novih podataka.
+     * Za pristup ovom izborniku potrebne su administratorske ovlasti.
      *
-     * @param v vozilo za koje se provjerava dostupnost
-     * @param routes lista svih ruta u sustavu
-     * @return indeks rute na kojoj je vozilo korišteno ili -1 ako je dostupno
-     */
-    static int isVehicleUsed(Vehicle v, List<Route> routes) {
-        if (v == null) return -1;
-
-        for (int i = 0; i < routes.size(); i++) {
-            Vehicle rvozilo = routes.get(i).getVehicle();
-            if (rvozilo == v || (rvozilo != null && rvozilo.getRegistration().equals(v.getRegistration()))) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * Ispisuje dostupnost svih vozila u sustavu grupiranu po statusu dostupnosti.
-     *
-     * @param vehicles lista vozila za prikaz dostupnosti
-     * @param routes lista ruta za provjeru korištenja vozila
-     */
-    static void dostupnostVozila(List<? extends Vehicle> vehicles, List<Route> routes) {
-        Map<Boolean, List<Vehicle>> vozilaPoDostupnosti = vehicles.stream()
-                .collect(Collectors.groupingBy(vehicle -> isVehicleUsed(vehicle, routes) != -1));
-
-        Optional.ofNullable(vozilaPoDostupnosti.get(true)).ifPresent(nedostupna -> {
-            for (Vehicle v : nedostupna) {
-                v.ispis();
-                int index = isVehicleUsed(v, routes);
-                Route r = routes.get(index);
-                log.info("⚠️ NEDOSTUPAN - Linija {} - {}\n", r.getPocetnastanica(), r.getKrajnastanica());
-            }
-        });
-
-        Optional.ofNullable(vozilaPoDostupnosti.get(false)).ifPresent(dostupna -> {
-            for (Vehicle v : dostupna) {
-                v.ispis();
-                log.info("✅ DOSTUPAN\n");
-            }
-        });
-    }
-
-    /**
-     * Obavlja proces prijave korisnika u sustav.
-     *
-     * @param scanner Scanner objekt za unos podataka
-     * @param korisnik privremeni User objekt za validaciju unosa
-     * @return potpuno popunjen User objekt s korisničkim podacima
-     */
-    private static User login(Scanner scanner, User korisnik) {
-        log.info("Unesite ime i prezime: ");
-        String name = null;
-        name = unosIme(scanner, korisnik, name);
-
-        log.info("Broj godina: ");
-        int age;
-        age = unosGodine(scanner, korisnik);
-
-        log.info("Unesite username: ");
-        String nameID = null;
-        nameID = unosUsername(scanner, nameID);
-
-        log.info("Unesite email adresu: ");
-        String email = null;
-        email = unosEmail(scanner, korisnik, email);
-
-        return new User(name, age, nameID, email);
-    }
-
-    private static String unosEmail(Scanner scanner, User korisnik, String email) {
-        while (email == null) {
-            try {
-                email = scanner.nextLine();
-                if (email.isEmpty()) throw new PraznoException("Nedostaje email adresa.");
-                else if (!korisnik.provjeriMail(email)) {
-                    log.info("Pogresni format email adrese. Pokusajte ponovo: ");
-                    email = null;
-                }
-            } catch (PraznoException e) {
-                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
-                email = null;
-            }
-        }
-        return email;
-    }
-
-    private static String unosUsername(Scanner scanner, String nameID) {
-        while (nameID == null) {
-            try {
-                nameID = scanner.nextLine();
-                if (nameID.isEmpty()) throw new PraznoException("Nedostaje username.");
-            } catch (PraznoException _) {
-                log.info("Pogresno uneseni username. Pokusajte ponovo: ");
-                nameID = null;
-            }
-        }
-        return nameID;
-    }
-
-    private static int unosGodine(Scanner scanner, User korisnik) {
-        int age;
-        while (true) {
-            try {
-                age = validacijaGodine(scanner);
-                if (korisnik.provjeriGodine(age)) break;
-                else log.info("Pogresna godina (10-100). Pokusajte ponovo: ");
-            } catch (PogresanUnosException | NegativniUnosException e) {
-                log.info(GRESKA_POKUSAJTE_PONOVO, e.getMessage());
-            }
-        }
-        return age;
-    }
-
-    private static String unosIme(Scanner scanner, User korisnik, String name) {
-        while (name == null) {
-            try {
-                name = scanner.nextLine();
-                if (name.isEmpty()) {
-                    throw new PraznoException("Nedostaje ime i prezime.");
-                } else if (!korisnik.provjeriImePrezime(name)) {
-                    log.info("Morate unijeti i ime i prezime. Pokusajte ponovo: ");
-                    name = null;
-                }
-            } catch (PraznoException _) {
-                log.info("Pogresno uneseni ime i prezime. Pokusajte ponovo: ");
-                name = null;
-            }
-        }
-        return name;
-    }
-
-    /**
-     * Omogućuje unos broja godina s validacijom formata.
-     *
-     * @param scanner Scanner objekt za unos podataka
-     * @return uneseni broj godina
-     * @throws PogresanUnosException ako unos nije cijeli broj
-     * @throws NegativniUnosException ako je unesena negativna vrijednost
-     */
-    private static int validacijaGodine(Scanner scanner) throws PogresanUnosException {
-        try {
-            int age = scanner.nextInt();
-            scanner.nextLine();
-            if (age < 0) throw new NegativniUnosException("Godina ne smije biti negativna.");
-            return age;
-        } catch (InputMismatchException _) {
-            throw new PogresanUnosException("Godina mora biti cijeli broj.");
-        }
-    }
-
-    /**
-     * Omogućuje unos datuma u specifičnom formatu.
-     *
-     * @param scanner Scanner objekt za unos podataka
-     * @return parsirani LocalDate objekt
-     * @throws PogresanDatumException ako format datuma nije ispravan
-     */
-    private static LocalDate unosDatum(Scanner scanner) throws PogresanDatumException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String datum = scanner.nextLine();
-        try {
-            return LocalDate.parse(datum, formatter);
-        } catch (DateTimeParseException _) {
-            throw new PogresanDatumException("Datum mora biti u formatu dd.MM.yyyy.");
-        }
-    }
-
-    /**
-     * Provjerava administratorske ovlasti korisnika.
-     *
-     * @param korisnik User objekt za provjeru identiteta
-     * @param scanner Scanner objekt za unos lozinke
-     * @return true ako korisnik nema administratorske ovlasti, false inače
-     */
-    private static boolean provjeraAdmin(User korisnik, Scanner scanner) {
-        if (!korisnik.getNameID().equals("llulic")) {
-            log.info("Greska! Korisnik {} nije autoriziran za ovu opciju.", korisnik.getNameID());
-            return true;
-        }
-
-        log.info("Unesite lozinku za administratora ({}): ",korisnik.getNameID());
-        String lozinka = scanner.nextLine();
-
-        if (!"admin123".equals(lozinka)) {
-            log.info("Greska! Lozinka nije ispravna.");
-            return true;
-        }
-
-        log.info("Lozinka je ispravna.");
-        return false;
-    }
-
-    /**
-     * Upravlja procesom dodavanja novih linija u sustav.
-     *
-     * @param routes lista ruta u koju se dodaju nove linije
-     * @param scanner Scanner objekt za unos podataka
-     * @param vehicles lista vozila za dodjelu novim linijama
-     * @param cjenik cjenik karata za izračun cijena
-     */
-    private static void procesDodavanjaLinije(List<? super Route> routes, Scanner scanner, List<Vehicle> vehicles, CijenaKarte cjenik) {
-        try {
-            log.info("Koliko novih linija zelite dodati? ");
-            int brojLinijaZaDodavanje = scanner.nextInt();
-            scanner.nextLine();
-
-            if (brojLinijaZaDodavanje < 0) {
-                throw new NegativniUnosException("Broj linija ne smije biti negativan.");
-            }
-
-            dodavanjeLinija(brojLinijaZaDodavanje, scanner, vehicles, routes, cjenik);
-        } catch (NegativniUnosException e) {
-            log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
-            scanner.nextLine();
-        }
-    }
-
-    /**
-     * Upravlja procesom dodavanja novih vozila u sustav.
-     *
-     * @param vehicles lista vozila u koju se dodaju nova vozila
-     * @param scanner Scanner objekt za unos podataka
-     * @param registracije skup postojećih registracija za provjeru jedinstvenosti
-     * @param mapaVozila mapa vozila za ažuriranje
-     */
-    private static void procesDodavanjaVozila(List<? super Vehicle> vehicles, Scanner scanner, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
-        try {
-            log.info("Koliko novih vozila zelite dodati? ");
-            int brojVozilaZaDodavanje = scanner.nextInt();
-            scanner.nextLine();
-
-            if (brojVozilaZaDodavanje < 0) {
-                throw new NegativniUnosException("Broj vozila ne smije biti negativan.");
-            }
-
-            dodavanjeVozila(brojVozilaZaDodavanje, scanner, vehicles, registracije, mapaVozila);
-        } catch (NegativniUnosException e) {
-            log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
-            scanner.nextLine();
-        }
-    }
-
-    /**
-     * Obavlja unos podataka za nove linije.
-     *
-     * @param brojLinijaZaDodavanje broj linija koje treba dodati
-     * @param scanner Scanner objekt za unos podataka
-     * @param vehicles lista vozila za dodjelu linijama
-     * @param routes lista ruta za dodavanje novih linija
-     * @param cjenik cjenik karata za izračun cijena
-     */
-    private static void dodavanjeLinija(int brojLinijaZaDodavanje, Scanner scanner, List<Vehicle> vehicles,
-                                        List<? super Route> routes, CijenaKarte cjenik) {
-        for (int i = 0; i < brojLinijaZaDodavanje; i++) {
-            log.info("Pocetna stanica: ");
-            String pocetnastanica = unesiNePrazno(scanner, "pocetna stanica");
-
-            log.info("Krajnja stanica: ");
-            String krajnjastanica = unesiNePrazno(scanner, "krajnja stanica");
-
-            log.info("Kilometraza: ");
-            BigDecimal kilometers = unesiKilometrazu(scanner);
-
-            log.info("Datum polaska (dd.MM.yyyy): ");
-            LocalDate datum = unesiDatum(scanner);
-
-            log.info("Vrijeme polaska: ");
-            String vrijemepolaska = scanner.nextLine();
-
-            Vehicle odabranovozilo = pronadiVoziloPoRegistraciji(scanner, vehicles);
-
-            routes.add(Route.builder(odabranovozilo, datum)
-                    .time(vrijemepolaska)
-                    .pocetnastanica(pocetnastanica)
-                    .krajnastanica(krajnjastanica)
-                    .kilometers(kilometers)
-                    .cjenik(cjenik)
-                    .build());
-
-            log.info("Linija uspjesno dodana!");
-        }
-    }
-
-    /**
-     * Obavlja unos podataka za nova vozila i dodaje ih u sustav.
-     *
-     * @param brojVozilaZaDodavanje broj vozila koja treba dodati u sustav
      * @param scanner Scanner objekt za unos korisničkih podataka
-     * @param vehicles lista vozila u koju se dodaju nova vozila
-     * @param registracije skup registracijskih oznaka za provjeru jedinstvenosti
-     * @param mapaVozila mapa vozila koja se ažurira novim vozilima
+     * @param korisnik trenutno prijavljeni korisnik
+     * @param vozila manager za upravljanje vozilima
+     * @param rute manager za upravljanje rutama
+     * @param korisnici manager za upravljanje korisnicima
+     * @param cjenik cjenik karata za izračun cijena ruta
      */
-    private static void dodavanjeVozila(int brojVozilaZaDodavanje, Scanner scanner,
-                                        List<? super Vehicle> vehicles, Set<String> registracije, Map<String, Vehicle> mapaVozila) {
-        for (int i = 0; i < brojVozilaZaDodavanje; i++) {
-            log.info("Unesite registraciju: ");
-            String registration = scanner.nextLine();
+    private static void menuUnos(Scanner scanner, User korisnik, VozilaManager vozila,
+                                 RuteManager rute, KorisnikManager korisnici, CijenaKarte cjenik) {
+        if(!korisnici.jeAdmin(korisnik, scanner)) return;
 
-            if (registracije.contains(registration.toLowerCase())) {
-                log.info("Greska! Vozilo sa registracijom {} vec postoji.", registration);
-                i--;
-                continue;
-            }
-
-            log.info("Unesite tip vozila (Bus/Tramvaj): ");
-            String model = unesiTipVozila(scanner);
-
-            log.info("Unesite boju: ");
-            String color = scanner.nextLine();
-
-            log.info("Unesite godinu proizvodnje: ");
-            int year = unesiGodinuProizvodnje(scanner);
+        int izbor;
+        do {
+            log.info("\n1) Novo vozilo");
+            log.info("2) Nova ruta");
+            log.info("3) Nazad");
+            log.info("Odabir: ");
+            izbor = scanner.nextInt();
             scanner.nextLine();
 
-            Vehicle novoVozilo;
-            if (model.equals("Bus")) {
-                novoVozilo= new Bus(registration, color, year);
-                vehicles.add(novoVozilo);
-            } else {
-                novoVozilo=new Tramvaj(registration, color, year);
-                vehicles.add(novoVozilo);
-            }
-
-            registracije.add(registration.toLowerCase());
-            mapaVozila.put(registration.toUpperCase(), novoVozilo);
-            log.info("Uspjesno dodano vozilo.");
-        }
-    }
-
-    // Pomocna metoda za unos podataka
-    private static String unesiNePrazno(Scanner scanner, String naziv) {
-        String unos;
-        while (true) {
-            unos = scanner.nextLine();
-            if (!unos.isEmpty()) return unos;
-            log.info("Nedostaje {}. Pokusajte ponovo: ",naziv);
-        }
-    }
-
-    private static BigDecimal unesiKilometrazu(Scanner scanner) {
-        while (true) {
-            try {
-                BigDecimal kilometers = new BigDecimal(scanner.nextLine());
-                if (kilometers.compareTo(BigDecimal.ZERO) < 0) {
-                    throw new NegativniUnosException("Kilometraza ne smije biti negativna.");
-                }
-                return kilometers;
-            } catch (NegativniUnosException e) {
-                log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
-            } catch (NumberFormatException _) {
-                log.info("Kilometraza mora biti broj. Pokusajte ponovo: ");
-            }
-        }
-    }
-
-    private static LocalDate unesiDatum(Scanner scanner) {
-        while (true) {
-            try {
-                return unosDatum(scanner);
-            } catch (PogresanDatumException e) {
-                log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
-            }
-        }
+            if(izbor == 1) unosVozila(scanner, vozila);
+            else if(izbor == 2) rute.unosNoveRute(scanner, cjenik);
+        } while(izbor != 3);
     }
 
     /**
-     * Pronalazi vozilo po registracijskoj oznaci.
+     * Omogućuje unos novog vozila u sustav.
+     * Provjerava jedinstvenost registracije i validnost unesenih podataka.
+     * Podržava dva tipa vozila: autobus (Bus) i tramvaj (Tramvaj).
      *
-     * @param scanner Scanner objekt za unos registracije
-     * @param vehicles lista vozila za pretragu
-     * @return pronađeno vozilo ili null ako ne postoji
+     * @param scanner Scanner objekt za unos podataka o vozilu
+     * @param vozila manager u koji se dodaje novo vozilo
      */
-    private static Vehicle pronadiVoziloPoRegistraciji(Scanner scanner, List<Vehicle> vehicles) {
-        while (true) {
-            log.info("Unesite registraciju vozila: ");
-            String registracija = scanner.nextLine();
-
-            Optional<Vehicle> vozilo = vehicles.stream()
-                    .filter(v -> v.getRegistration().equalsIgnoreCase(registracija))
-                    .findFirst();
-
-            if (vozilo.isPresent())
-            {
-                return vozilo.get();
-            }
-            log.info("Greska! Vozilo sa registracijom {} ne postoji.", registracija);
-        }
-    }
-
-    private static String unesiTipVozila(Scanner scanner) {
-        String model;
-        while (true) {
-            model = scanner.nextLine();
-            if (model.equals("Bus") || model.equals("Tramvaj")) return model;
-            log.info("Greska! Pogresan tip vozila! Unesite tip vozila (Bus/Tramvaj): ");
-        }
-    }
-
-    private static int unesiGodinuProizvodnje(Scanner scanner) {
-        while (true) {
-            try {
-                return validacijaGodine(scanner);
-            } catch (PogresanUnosException | NegativniUnosException e) {
-                log.info(GRESKA_POKUSAJTE_PONOVO,e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Ispisuje listu svih vozila s pripadajućom dostupnošću.
-     */
-    private static void ispisiVozila(List<Vehicle> vehicles, List<Route> routes) {
-        log.info("=== VOZILA ===");
-        dostupnostVozila(vehicles, routes);
-    }
-
-    /**
-     * Ispisuje sve linije u sustavu.
-     */
-    private static void ispisiLinije(List<Route> routes) {
-        log.info("=== LINIJE ===");
-        routes.forEach(Route::ispis);
-    }
-
-    /**
-     * Pronalazi i ispisuje linije s najvećom ili najmanjom kilometražom.
-     * Korisnik bira želi li vidjeti najkraću ili najdužu liniju.
-     *
-     * @param scanner Scanner objekt za unos korisničkog izbora
-     * @param routes lista ruta za analizu kilometraže
-     */
-    private static void pronadiKilometrazu(Scanner scanner, List<Route> routes) {
-        int odabir=0;
-        while (odabir!=3) {
-            log.info("1) Najkraca linija\n2) Najduza linija\n3) Izlaz");
-            odabir = scanner.nextInt();
-            scanner.nextLine();
-
-            switch(odabir){
-                case 1->
-                        routes.stream()
-                                .min(Comparator.comparing(Route::getKilometers))
-                                .ifPresent(route -> {
-                                    log.info("Najkraca linija: ");
-                                    route.ispis();
-                                });
-                case 2->
-                        routes.stream()
-                                .max(Comparator.comparing(Route::getKilometers))
-                                .ifPresent(route -> {
-                                    log.info("Najduza linija: ");
-                                    route.ispis();
-                                });
-                default->log.info("Krivi unos.");
-            }
-
-        }
-    }
-
-    /**
-     * Pronalazi i ispisuje sve linije koje kreću s određenog polazišta.
-     * Pretraga nije osjetljiva na velika i mala slova.
-     *
-     * @param scanner Scanner objekt za unos naziva polazišta
-     * @param routes lista ruta za pretragu
-     */
-    private static void pronadiStanice(Scanner scanner, List<Route> routes) {
-        log.info("Unesite polaziste: ");
-        String polaziste = scanner.nextLine();
-
-        List<Route> pocetneStanice = routes.stream()
-                .filter(route -> polaziste.equalsIgnoreCase(route.getPocetnastanica()))
-                .toList();
-
-        if (pocetneStanice.isEmpty()) {
-            log.info("Ne postoji linija koja krece iz stanice {}.", polaziste);
-        } else {
-            pocetneStanice.forEach(Route::ispis);
-        }
-    }
-
-    /**
-     * Pronalazi i ispisuje sve linije koje koriste vozilo s određenom registracijom.
-     *
-     * @param scanner Scanner objekt za unos registracije
-     * @param routes lista ruta za pretragu
-     * @param mapaVozila mapa vozila za brzo pronalaženje
-     */
-    private static void pronadiRegistraciju(Scanner scanner, List<Route> routes, Map<String, Vehicle> mapaVozila) {
-        log.info("Unesite registraciju: ");
-        String registracijavozila = scanner.nextLine().toUpperCase();
-
-        Vehicle vozilo =mapaVozila.get(registracijavozila);
-
-        if(vozilo==null){
-            log.info("Vozilo sa registracijom {} ne postoji.", registracijavozila);
+    private static void unosVozila(Scanner scanner, VozilaManager vozila) {
+        log.info("Registracija: ");
+        String reg = scanner.nextLine().trim();
+        if (reg.isEmpty()) {
+            log.info("Registracija ne smije biti prazna!");
             return;
-
+        }
+        if(vozila.voziloPostoji(reg)) {
+            log.info("Već postoji!");
+            return;
         }
 
-        List<Route>rutaZaVozilo=routes.stream()
-                .filter(ruta -> ruta.getVehicle().getRegistration().equalsIgnoreCase(registracijavozila))
-                .toList();
-
-        if(rutaZaVozilo.isEmpty()){
-            log.info("Vozilo postoji, ali nema dodjeljenu liniju.");
-            vozilo.ispis();
-        } else{
-            rutaZaVozilo.forEach(Route::ispis);
+        String tip;
+        while (true) {
+            log.info("Tip (Bus/Tramvaj): ");
+            tip = scanner.nextLine().toLowerCase();
+            if (tip.equals("bus") || tip.equals("tramvaj")) {
+                break;
+            }
+            log.info("Pogrešan tip! Unesite 'Bus' ili 'Tramvaj'");
         }
-    }
 
-    /**
-     * Pronalazi i ispisuje najnovije ili najstarije vozilo u sustavu.
-     * Korisnik bira želi li vidjeti najnovije ili najstarije vozilo.
-     *
-     * @param scanner Scanner objekt za unos korisničkog izbora
-     * @param vehicles lista vozila za pretragu
-     */
-    private static void pronadiGodinuProizvodnje(Scanner scanner, List<? extends Vehicle> vehicles) {
-        int odabir=0;
-        while (odabir!=3) {
-            log.info("1) Najnovije vozilo\n2) Najstarije vozilo\n3) Izlaz");
-            odabir = scanner.nextInt();
-            scanner.nextLine();
+        log.info("Boja: ");
+        String boja = scanner.nextLine().trim();
+        if (boja.isEmpty()) {
+            log.info("Boja ne smije biti prazna!");
+            return;
+        }
 
-            switch(odabir){
-                case 1 ->
-                        vehicles.stream()
-                        .max(Comparator.comparing(Vehicle::getYear))
-                        .ifPresent(vehicle -> {
-                            log.info("=== Najnovije vozilo ===");
-                            vehicle.ispis();
-                        });
-                case 2 ->
-                        vehicles.stream()
-                                .min(Comparator.comparing(Vehicle::getYear))
-                                .ifPresent(vehicle -> {
-                                    log.info("=== Najstarije vozilo ===");
-                                    vehicle.ispis();
-                                });
-                default -> log.info("Krivi unos.");
+        int godina;
+        while (true) {
+            try {
+                log.info("Godina: ");
+                godina = scanner.nextInt();
+                scanner.nextLine();
+                if (godina < 1900 || godina > 2024) {
+                    log.info("Godina mora biti između 1900 i 2024!");
+                } else {
+                    break;
+                }
+            } catch (InputMismatchException e) {
+                log.info("Morate unijeti broj!");
+                scanner.nextLine();
             }
         }
+
+        Vehicle novo = tip.equals("bus") ?
+                new Bus(reg, boja, godina) : new Tramvaj(reg, boja, godina);
+        vozila.dodajVozilo(novo);
+        log.info("Vozilo dodano!");
     }
 
     /**
-     * Popunjuje mapu vozila registracijskim oznakama kao ključevima.
+     * Prikazuje i upravlja podizbornikom za pretraživanje podataka.
+     * Nudi različite načine pretrage vozila i ruta.
      *
-     * @param mapaVozila mapa za popunjavanje
-     * @param vehicles lista vozila za dodavanje u mapu
+     * @param scanner Scanner objekt za unos kriterija pretrage
+     * @param vozila manager za pretragu vozila
+     * @param rute manager za pretragu ruta
      */
-    private static void popuniMapuVozilima(Map<String, Vehicle> mapaVozila, List<? extends Vehicle> vehicles) {
-        mapaVozila.clear();
-        for (Vehicle vozilo : vehicles) {
-            mapaVozila.put(vozilo.getRegistration(), vozilo);
+    private static void menuPretraga(Scanner scanner, VozilaManager vozila, RuteManager rute) {
+        int izbor;
+        do {
+            log.info("\n=== PRETRAGA ===");
+            log.info("1) Po registraciji");
+            log.info("2) Po stanici");
+            log.info("3) Sve rute");
+            log.info("4) Sva vozila");
+            log.info("5) Električna vozila");
+            log.info("6) Dostupnost");
+            log.info("7) Najkraća/najduža ruta");
+            log.info("8) Najnovije/najstarije vozilo");
+            log.info("9) Nazad");
+            log.info("Odabir: ");
+            izbor = scanner.nextInt();
+            scanner.nextLine();
+
+            switch(izbor) {
+                case 1 -> pretragaRegistracija(scanner, rute);
+                case 2 -> pretragaStanica(scanner, rute);
+                case 3 -> rute.ispisiSveRute();
+                case 4 -> vozila.ispisiSvaVozila();
+                case 5 -> vozila.ispisiElektricnaVozila();
+                case 6 -> rute.ispisiDostupnostVozila();
+                case 7 -> menuKilometraza(rute);
+                case 8 -> menuGodineProizvodnje(vozila);
+            }
+        } while(izbor != 9);
+    }
+
+    /**
+     * Pretražuje rute po registracijskoj oznaci vozila.
+     * Prikazuje sve rute na kojima se koristi vozilo s unesenom registracijom.
+     *
+     * @param scanner Scanner objekt za unos registracije
+     * @param rute manager koji vrši pretragu ruta
+     */
+    private static void pretragaRegistracija(Scanner scanner, RuteManager rute) {
+        log.info("Unesite registraciju: ");
+        String reg = scanner.nextLine();
+        List<Route> pronadjeno = rute.nadjiRutePoRegistraciji(reg);
+        if (pronadjeno.isEmpty()) {
+            log.info("Nema ruta za tu registraciju!");
+        } else {
+            pronadjeno.forEach(Route::ispis);
         }
     }
 
     /**
-     * Filtrira i prikazuje samo električna vozila iz liste.
+     * Pretražuje rute po nazivu stanice.
+     * Prikazuje sve rute koje polaze ili dolaze na unesenu stanicu.
      *
-     * @param vehicles lista svih vozila za filtriranje
+     * @param scanner Scanner objekt za unos naziva stanice
+     * @param rute manager koji vrši pretragu ruta
      */
-    private static void podjelaNaElektricna(List<Vehicle> vehicles) {
+    private static void pretragaStanica(Scanner scanner, RuteManager rute) {
+        log.info("Unesite stanicu: ");
+        String stanica = scanner.nextLine();
+        List<Route> pronadjeno = rute.nadjiRutePoStanici(stanica);
+        if (pronadjeno.isEmpty()) {
+            log.info("Nema ruta za tu stanicu!");
+        } else {
+            pronadjeno.forEach(Route::ispis);
+        }
+    }
 
-        List<Vehicle>elektricnaVozila=vehicles.stream()
-                        .filter(vozilo-> (vozilo instanceof Elektricni e) && e.jeElektricni())
-                        .toList();
+    /**
+     * Prikazuje podizbornik za pretragu najkraće i najduže rute.
+     * Omogućuje korisniku odabir želi li vidjeti najkraću ili najdužu rutu.
+     *
+     * @param rute manager koji sadrži podatke o rutama
+     */
+    private static void menuKilometraza(RuteManager rute) {
+        log.info("\n1) Najkraća linija");
+        log.info("2) Najduža linija");
+        log.info("Odabir: ");
 
-        log.info("=== ELEKTRICNA VOZILA ===");
-        elektricnaVozila.forEach(Vehicle::ispis);
+        Scanner temp = new Scanner(System.in);
+        int izbor = temp.nextInt();
+
+        if (izbor == 1) {
+            rute.getNajkracaRuta().ifPresentOrElse(
+                    ruta -> {
+                        log.info("=== NAJKRAĆA LINIJA ===");
+                        ruta.ispis();
+                    },
+                    () -> log.info("Nema linija!")
+            );
+        } else if (izbor == 2) {
+            rute.getNajduzaRuta().ifPresentOrElse(
+                    ruta -> {
+                        log.info("=== NAJDUŽA LINIJA ===");
+                        ruta.ispis();
+                    },
+                    () -> log.info("Nema linija!")
+            );
+        }
+    }
+
+    /**
+     * Prikazuje podizbornik za pretragu najnovijeg i najstarijeg vozila.
+     * Omogućuje korisniku odabir želi li vidjeti najnovije ili najstarije vozilo.
+     *
+     * @param vozila manager koji sadrži podatke o vozilima
+     */
+    private static void menuGodineProizvodnje(VozilaManager vozila) {
+        log.info("\n1) Najnovije vozilo");
+        log.info("2) Najstarije vozilo");
+        log.info("Odabir: ");
+
+        Scanner temp = new Scanner(System.in);
+        int izbor = temp.nextInt();
+
+        if (izbor == 1) {
+            vozila.getNajnovijeVozilo().ifPresentOrElse(
+                    vozilo -> {
+                        log.info("=== NAJNOVIJE VOZILO ===");
+                        vozilo.ispis();
+                    },
+                    () -> log.info("Nema vozila!")
+            );
+        } else if (izbor == 2) {
+            vozila.getNajstarijeVozilo().ifPresentOrElse(
+                    vozilo -> {
+                        log.info("=== NAJSTARIJE VOZILO ===");
+                        vozilo.ispis();
+                    },
+                    () -> log.info("Nema vozila!")
+            );
+        }
     }
 }
