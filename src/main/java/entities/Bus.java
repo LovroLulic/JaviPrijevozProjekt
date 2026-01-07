@@ -15,7 +15,7 @@ public class Bus extends Vehicle implements Elektricni{
 
     public Bus(){
         super();
-        this.setType( TipVozila.BUS);
+        this.setType( TipVozila.Bus);
     }
 
 
@@ -27,7 +27,7 @@ public class Bus extends Vehicle implements Elektricni{
      * @param year Godina proizvodnje
      */
     public Bus(String registration, String color, Integer year) {
-        super(registration, TipVozila.BUS, color, year);
+        super(registration, TipVozila.Bus, color, year);
         Random random=new Random();
         int rndm=random.nextInt(1,5);  //1-benzinski/dizel, 2-elektrican, 3-hibrid, 4-plinski
         this.pogon=rndm;

@@ -1,0 +1,41 @@
+[ {
+  "registration" : "ZG19055A",
+  "type" : "Tramvaj",
+  "color" : "Plava",
+  "year" : 2019
+}, {
+  "registration" : "ZG23045B",
+  "type" : "Bus",
+  "color" : "Plava",
+  "year" : 2012
+}, {
+  "registration" : "ZG01045C",
+  "type" : "Tramvaj",
+  "color" : "Bijela",
+  "year" : 2023
+}, {
+  "registration" : "ZG01045D",
+  "type" : "Bus",
+  "color" : "Bijela",
+  "year" : 2023
+}, {
+  "registration" : "ZG01045E",
+  "type" : "Bus",
+  "color" : "Zelena",
+  "year" : 2023
+}, {
+  "registration" : "ZG01045F",
+  "type" : "Tramvaj",
+  "color" : "Roza",
+  "year" : 2023
+}, {
+  "registration" : "ZG01045G",
+  "type" : "Bus",
+  "color" : "Crvena",
+  "year" : 2023
+}, {
+  "registration" : "ZG0000A",
+  "type" : "Tramvaj",
+  "color" : "Plava",
+  "year" : 2019
+} ]

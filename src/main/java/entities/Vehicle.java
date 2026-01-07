@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "vehicle_class"
+        property = "type"
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Bus.class, name = "Bus"),
@@ -48,9 +48,8 @@ public abstract class Vehicle {
         return registration;
     }
 
-    @JsonIgnore
     public String getType() {
-        return type.getNaziv();
+        return type.toString();
     }
 
     public String getColor() {

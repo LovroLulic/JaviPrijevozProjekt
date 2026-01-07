@@ -1,0 +1,27 @@
+[ {
+  "vehicle" : {
+    "type" : "Tramvaj",
+    "registration" : "ZG19055A",
+    "type" : "Tramvaj",
+    "color" : "Plava",
+    "year" : 2019
+  },
+  "date" : [ 2025, 12, 23 ],
+  "time" : "19:04",
+  "pocetnastanica" : "Velika Gorica",
+  "krajnastanica" : "Aerodrom",
+  "kilometers" : 6.24
+}, {
+  "vehicle" : {
+    "type" : "Tramvaj",
+    "registration" : "ZG01045C",
+    "type" : "Tramvaj",
+    "color" : "Bijela",
+    "year" : 2023
+  },
+  "date" : [ 2025, 9, 12 ],
+  "time" : "18:45",
+  "pocetnastanica" : "Glavni Kolodvor",
+  "krajnastanica" : "Vrapce",
+  "kilometers" : 8.5
+} ]

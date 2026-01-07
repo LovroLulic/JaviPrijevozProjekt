@@ -11,7 +11,7 @@ public class Tramvaj extends Vehicle implements Elektricni{
 
     public Tramvaj(){
         super();
-        this.setType( TipVozila.TRAMVAJ);
+        this.setType( TipVozila.Tramvaj);
     }
     /**
      * Konstruktor za stvaranje tramvaja.
@@ -21,7 +21,7 @@ public class Tramvaj extends Vehicle implements Elektricni{
      * @param year Godina proizvodnje
      */
     public Tramvaj(String registration, String color, Integer year) {
-        super(registration, TipVozila.TRAMVAJ, color, year);
+        super(registration, TipVozila.Tramvaj, color, year);
     }
     /**
      * Provjerava je li vozilo tramvaj.
