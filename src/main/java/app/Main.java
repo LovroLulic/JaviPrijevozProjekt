@@ -39,8 +39,16 @@ public class Main {
         );
 
         // Početni podaci
-        vozila.dodajPocetnaVozila();
-        rute.dodajPocetneRute(cjenik);
+        vozila.ucitajSvaVozila();
+        if (vozila.getSvaVozila().isEmpty()){
+            log.info("JSON prazan, dodajem početna vozila...");
+            vozila.dodajPocetnaVozila();
+        }
+        rute.ucitajRute();
+        if(rute.getSveRute().isEmpty()){
+            log.info("JSON prazan, dodajem pocetne rute...");
+            rute.dodajPocetneRute(cjenik);
+        }
 
         // Login
         User korisnik = korisnici.login(scanner);
@@ -69,6 +77,14 @@ public class Main {
         scanner.close();
         log.info("Program završen");
     }
+
+
+
+
+
+
+
+
 
     /**
      * Prikazuje i upravlja podizbornikom za unos novih podataka.
@@ -147,7 +163,7 @@ public class Main {
                 } else {
                     break;
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException _) {
                 log.info("Morate unijeti broj!");
                 scanner.nextLine();
             }
@@ -193,6 +209,7 @@ public class Main {
                 case 6 -> rute.ispisiDostupnostVozila();
                 case 7 -> menuKilometraza(rute);
                 case 8 -> menuGodineProizvodnje(vozila);
+                default -> log.info("Krivi odabir!");
             }
         } while(izbor != 9);
     }

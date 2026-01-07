@@ -2458,3 +2458,9 @@ Dobrodosao Lovro Lulic (llulic, 20)
 2025-12-07 17:19:33,207 INFO [main] app.Main [Main.java:41] Odabir: 
 2025-12-07 17:19:34,294 INFO [main] app.Main [Main.java:49] Hvala i doviđenja!
 2025-12-07 17:19:34,294 INFO [main] app.Main [Main.java:55] Program završen
+2026-01-07 14:53:40,418 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 14:53:40,517 INFO [main] app.Main [Main.java:44] JSON prazan, dodajem početna vozila...
+2026-01-07 14:53:40,670 INFO [main] app.Main [Main.java:49] JSON prazan, dodajem pocetne rute...
+2026-01-07 14:55:18,994 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 14:55:26,648 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:03:14,199 INFO [main] app.Main [Main.java:29] Program pokrenut

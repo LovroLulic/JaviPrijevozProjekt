@@ -15,6 +15,10 @@ public final class User extends Person implements Provjera {
     private String nameID;
     private String email;
 
+    public User(){
+        super("",0);
+    }
+
     /**
      * Konstruktor za stvaranje korisnika.
      *

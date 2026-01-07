@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class VozilaManager {
     private List<Vehicle> svaVozila = new ArrayList<>();
     private Map<String, Vehicle> vozilaPoRegistraciji = new HashMap<>();
+    private static final String FILE_PATH="vozila.json";
 
     public void dodajPocetnaVozila(){
         dodajVozilo(new Tramvaj("ZG19055A", "Plava", 2019));
@@ -16,12 +17,18 @@ public class VozilaManager {
         dodajVozilo(new Bus("ZG01045E", "Zelena", 2023));
         dodajVozilo(new Tramvaj("ZG01045F", "Roza", 2023));
         dodajVozilo(new Bus("ZG01045G", "Crvena", 2023));
+    }
+
+    public void ucitajSvaVozila(){
+        this.svaVozila=JsonService.ucitajIzJsona(FILE_PATH,Vehicle.class);
+        svaVozila.forEach(v->vozilaPoRegistraciji.put(v.getRegistration().toUpperCase(),v));
 
     }
 
     public void dodajVozilo(Vehicle vozilo) {
         svaVozila.add(vozilo);
         vozilaPoRegistraciji.put(vozilo.getRegistration().toUpperCase(), vozilo);
+        JsonService.spremiUJson(FILE_PATH,svaVozila);
     }
 
     public Optional<Vehicle> nadjiVozilo(String registracija) {

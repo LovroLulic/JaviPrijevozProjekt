@@ -10,7 +10,10 @@ import java.util.Random;
  */
 public class Bus extends Vehicle implements Elektricni{
 
+
     private final int pogon;
+
+
 
     /**
      * Konstruktor za stvaranje autobusa.

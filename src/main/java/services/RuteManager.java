@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class RuteManager {
     private List<Route> sveRute = new ArrayList<>();
     private VozilaManager vozilaManager;
+    public static final String FILE_PATH="rute.json";
 
     public RuteManager(VozilaManager vozilaManager) {
         this.vozilaManager = vozilaManager;
@@ -35,6 +36,10 @@ public class RuteManager {
                 .kilometers(new BigDecimal("8.5"))
                 .cjenik(cjenik)
                 .build());
+        JsonService.spremiUJson(FILE_PATH, sveRute);
+    }
+    public void ucitajRute() {
+        this.sveRute=JsonService.ucitajIzJsona(FILE_PATH,Route.class);
     }
 
     public void unosNoveRute(Scanner scanner, CijenaKarte cjenik) {
@@ -58,6 +63,7 @@ public class RuteManager {
                 .build();
 
         sveRute.add(novaRuta);
+        JsonService.spremiUJson(FILE_PATH, sveRute);
         System.out.println("Ruta uspješno dodana!");
     }
 
@@ -191,5 +197,8 @@ public class RuteManager {
                 return unos;
             }
         }
+    }
+    public List<Route> getSveRute() {
+        return sveRute;
     }
 }

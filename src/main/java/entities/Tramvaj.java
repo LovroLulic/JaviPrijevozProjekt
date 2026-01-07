@@ -7,6 +7,9 @@ package entities;
  * @version 1.0
  */
 public class Tramvaj extends Vehicle implements Elektricni{
+
+
+    public Tramvaj(){}
     /**
      * Konstruktor za stvaranje tramvaja.
      *

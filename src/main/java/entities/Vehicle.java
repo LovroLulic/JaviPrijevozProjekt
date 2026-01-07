@@ -1,4 +1,7 @@
 package entities;
+
+
+
 /**
  * Predstavlja vozilo u sustavu javnog prijevoza.
  * Služi kao osnovna klasa za sve tipove vozila.
@@ -11,6 +14,9 @@ public abstract class Vehicle {
     private TipVozila type;
     private String color;
     private Integer year;
+
+
+    public Vehicle() {}
     /**
      * Konstruktor za stvaranje vozila.
      *
