@@ -10,7 +10,15 @@
   "time" : "19:04",
   "pocetnastanica" : "Velika Gorica",
   "krajnastanica" : "Aerodrom",
-  "kilometers" : 6.24
+  "kilometers" : 6.24,
+  "cjenik" : {
+    "cijena" : 2.00,
+    "studentskaCijena" : 1.00,
+    "umirovljenickaCijena" : 1.5,
+    "nocnaCijena" : 4.5,
+    "studentskaNocna" : 2.5,
+    "umirovljenickaNocna" : 3
+  }
 }, {
   "vehicle" : {
     "type" : "Tramvaj",
@@ -23,5 +31,34 @@
   "time" : "18:45",
   "pocetnastanica" : "Glavni Kolodvor",
   "krajnastanica" : "Vrapce",
-  "kilometers" : 8.5
+  "kilometers" : 8.5,
+  "cjenik" : {
+    "cijena" : 2.00,
+    "studentskaCijena" : 1.00,
+    "umirovljenickaCijena" : 1.5,
+    "nocnaCijena" : 4.5,
+    "studentskaNocna" : 2.5,
+    "umirovljenickaNocna" : 3
+  }
+}, {
+  "vehicle" : {
+    "type" : "Tramvaj",
+    "registration" : "ZG0000A",
+    "type" : "Tramvaj",
+    "color" : "Crvena",
+    "year" : 2019
+  },
+  "date" : [ 2026, 1, 12 ],
+  "time" : "23:54",
+  "pocetnastanica" : "Jarun",
+  "krajnastanica" : "Mihaljevac",
+  "kilometers" : 8.42,
+  "cjenik" : {
+    "cijena" : 2.00,
+    "studentskaCijena" : 1.00,
+    "umirovljenickaCijena" : 1.5,
+    "nocnaCijena" : 4.5,
+    "studentskaNocna" : 2.5,
+    "umirovljenickaNocna" : 3
+  }
 } ]

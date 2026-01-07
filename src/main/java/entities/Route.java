@@ -136,6 +136,8 @@ public class Route {
 
     public BigDecimal getKilometers() { return kilometers; }
 
+    public CijenaKarte getCjenik() { return cjenik; } // KLJUČNO: Dodano za ispravno spremanje
+    public void setCjenik(CijenaKarte cjenik) { this.cjenik = cjenik; }
     /**
      * Ispisuje informacije o ruti.
      */
