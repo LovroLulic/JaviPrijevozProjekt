@@ -2901,3 +2901,208 @@ Dobrodosao Lovro Lulic (llulic, 20)
 2026-01-07 15:59:08,749 INFO [main] app.Main [Main.java:197] 8) Najnovije/najstarije vozilo
 2026-01-07 15:59:08,749 INFO [main] app.Main [Main.java:198] 9) Nazad
 2026-01-07 15:59:08,749 INFO [main] app.Main [Main.java:199] Odabir: 
+2026-01-07 16:25:39,123 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 16:25:50,486 INFO [main] app.Main [Main.java:55] Dobrodošao Lovro Lulic!
+2026-01-07 16:25:50,489 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:25:50,489 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:25:50,489 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:25:50,489 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:25:50,489 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:25:50,489 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:25:50,489 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:25:58,109 INFO [main] app.Main [Main.java:75] Spremanje sigurnosne kopije...
+2026-01-07 16:25:58,136 INFO [main] app.Main [Main.java:78] Backup uspješno spremljen u backup.bin!
+2026-01-07 16:25:58,136 INFO [main] app.Main [Main.java:99] Program završen
+2026-01-07 16:27:55,048 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 16:28:03,962 INFO [main] app.Main [Main.java:55] Dobrodošao Lovro Lulic!
+2026-01-07 16:28:03,964 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:28:03,964 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:28:03,964 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:28:03,964 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:28:03,964 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:28:03,964 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:28:03,964 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:28:06,843 INFO [main] app.Main [Main.java:75] Spremanje sigurnosne kopije...
+2026-01-07 16:28:06,872 INFO [main] app.Main [Main.java:78] Backup uspješno spremljen u backup.bin!
+2026-01-07 16:28:06,872 INFO [main] app.Main [Main.java:99] Program završen
+2026-01-07 16:29:54,448 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 16:30:03,015 INFO [main] app.Main [Main.java:55] Dobrodošao Lovro Lulic!
+2026-01-07 16:30:03,016 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:30:03,016 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:30:03,016 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:30:03,016 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:30:03,017 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:30:03,017 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:30:03,017 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:30:04,479 INFO [main] app.Main [Main.java:75] Spremanje sigurnosne kopije...
+2026-01-07 16:30:04,502 INFO [main] app.Main [Main.java:78] Backup uspješno spremljen u backup.bin!
+2026-01-07 16:30:04,503 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:30:04,503 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:30:04,503 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:30:04,503 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:30:04,503 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:30:04,503 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:30:04,503 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:30:11,450 INFO [main] app.Main [Main.java:127] 
+1) Novo vozilo
+2026-01-07 16:30:11,451 INFO [main] app.Main [Main.java:128] 2) Nova ruta
+2026-01-07 16:30:11,451 INFO [main] app.Main [Main.java:129] 3) Nazad
+2026-01-07 16:30:11,451 INFO [main] app.Main [Main.java:130] Odabir: 
+2026-01-07 16:30:13,173 INFO [main] app.Main [Main.java:148] Registracija: 
+2026-01-07 16:30:15,886 INFO [main] app.Main [Main.java:155] Već postoji!
+2026-01-07 16:30:15,886 INFO [main] app.Main [Main.java:127] 
+1) Novo vozilo
+2026-01-07 16:30:15,886 INFO [main] app.Main [Main.java:128] 2) Nova ruta
+2026-01-07 16:30:15,886 INFO [main] app.Main [Main.java:129] 3) Nazad
+2026-01-07 16:30:15,886 INFO [main] app.Main [Main.java:130] Odabir: 
+2026-01-07 16:30:22,311 INFO [main] app.Main [Main.java:148] Registracija: 
+2026-01-07 16:30:25,564 INFO [main] app.Main [Main.java:161] Tip (Bus/Tramvaj): 
+2026-01-07 16:30:27,450 INFO [main] app.Main [Main.java:169] Boja: 
+2026-01-07 16:30:29,181 INFO [main] app.Main [Main.java:179] Godina: 
+2026-01-07 16:30:30,246 INFO [main] app.Main [Main.java:196] Vozilo dodano!
+2026-01-07 16:30:30,246 INFO [main] app.Main [Main.java:127] 
+1) Novo vozilo
+2026-01-07 16:30:30,246 INFO [main] app.Main [Main.java:128] 2) Nova ruta
+2026-01-07 16:30:30,246 INFO [main] app.Main [Main.java:129] 3) Nazad
+2026-01-07 16:30:30,246 INFO [main] app.Main [Main.java:130] Odabir: 
+2026-01-07 16:30:54,727 INFO [main] app.Main [Main.java:127] 
+1) Novo vozilo
+2026-01-07 16:30:54,728 INFO [main] app.Main [Main.java:128] 2) Nova ruta
+2026-01-07 16:30:54,728 INFO [main] app.Main [Main.java:129] 3) Nazad
+2026-01-07 16:30:54,728 INFO [main] app.Main [Main.java:130] Odabir: 
+2026-01-07 16:30:56,497 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:30:56,497 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:30:56,497 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:30:56,497 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:30:56,497 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:30:56,498 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:30:56,498 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:30:58,335 INFO [main] app.Main [Main.java:210] 
+=== PRETRAGA ===
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:211] 1) Po registraciji
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:212] 2) Po stanici
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:213] 3) Sve rute
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:214] 4) Sva vozila
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:215] 5) Električna vozila
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:216] 6) Dostupnost
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:217] 7) Najkraća/najduža ruta
+2026-01-07 16:30:58,336 INFO [main] app.Main [Main.java:218] 8) Najnovije/najstarije vozilo
+2026-01-07 16:30:58,337 INFO [main] app.Main [Main.java:219] 9) Nazad
+2026-01-07 16:30:58,337 INFO [main] app.Main [Main.java:220] Odabir: 
+2026-01-07 16:31:00,662 INFO [main] app.Main [Main.java:210] 
+=== PRETRAGA ===
+2026-01-07 16:31:00,662 INFO [main] app.Main [Main.java:211] 1) Po registraciji
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:212] 2) Po stanici
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:213] 3) Sve rute
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:214] 4) Sva vozila
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:215] 5) Električna vozila
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:216] 6) Dostupnost
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:217] 7) Najkraća/najduža ruta
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:218] 8) Najnovije/najstarije vozilo
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:219] 9) Nazad
+2026-01-07 16:31:00,663 INFO [main] app.Main [Main.java:220] Odabir: 
+2026-01-07 16:31:05,636 INFO [main] app.Main [Main.java:233] Krivi odabir!
+2026-01-07 16:31:05,637 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:31:05,637 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:31:05,637 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:31:05,637 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:31:05,637 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:31:05,637 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:31:05,637 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:31:07,249 INFO [main] app.Main [Main.java:93] Hvala i doviđenja!
+2026-01-07 16:31:07,250 INFO [main] app.Main [Main.java:99] Program završen
+2026-01-07 16:31:10,848 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 16:31:18,815 INFO [main] app.Main [Main.java:55] Dobrodošao Lovro Lulic!
+2026-01-07 16:31:18,817 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:31:18,817 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:31:18,817 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:31:18,817 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:31:18,817 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:31:18,817 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:31:18,818 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:31:20,108 INFO [main] app.Main [Main.java:210] 
+=== PRETRAGA ===
+2026-01-07 16:31:20,109 INFO [main] app.Main [Main.java:211] 1) Po registraciji
+2026-01-07 16:31:20,109 INFO [main] app.Main [Main.java:212] 2) Po stanici
+2026-01-07 16:31:20,109 INFO [main] app.Main [Main.java:213] 3) Sve rute
+2026-01-07 16:31:20,109 INFO [main] app.Main [Main.java:214] 4) Sva vozila
+2026-01-07 16:31:20,109 INFO [main] app.Main [Main.java:215] 5) Električna vozila
+2026-01-07 16:31:20,109 INFO [main] app.Main [Main.java:216] 6) Dostupnost
+2026-01-07 16:31:20,109 INFO [main] app.Main [Main.java:217] 7) Najkraća/najduža ruta
+2026-01-07 16:31:20,110 INFO [main] app.Main [Main.java:218] 8) Najnovije/najstarije vozilo
+2026-01-07 16:31:20,110 INFO [main] app.Main [Main.java:219] 9) Nazad
+2026-01-07 16:31:20,110 INFO [main] app.Main [Main.java:220] Odabir: 
+2026-01-07 16:31:21,996 INFO [main] app.Main [Main.java:210] 
+=== PRETRAGA ===
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:211] 1) Po registraciji
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:212] 2) Po stanici
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:213] 3) Sve rute
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:214] 4) Sva vozila
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:215] 5) Električna vozila
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:216] 6) Dostupnost
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:217] 7) Najkraća/najduža ruta
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:218] 8) Najnovije/najstarije vozilo
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:219] 9) Nazad
+2026-01-07 16:31:21,997 INFO [main] app.Main [Main.java:220] Odabir: 
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:210] 
+=== PRETRAGA ===
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:211] 1) Po registraciji
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:212] 2) Po stanici
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:213] 3) Sve rute
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:214] 4) Sva vozila
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:215] 5) Električna vozila
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:216] 6) Dostupnost
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:217] 7) Najkraća/najduža ruta
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:218] 8) Najnovije/najstarije vozilo
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:219] 9) Nazad
+2026-01-07 16:31:26,608 INFO [main] app.Main [Main.java:220] Odabir: 
+2026-01-07 16:31:31,368 INFO [main] app.Main [Main.java:233] Krivi odabir!
+2026-01-07 16:31:31,368 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:31:31,368 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:31:31,368 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:31:31,368 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:31:31,368 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:31:31,368 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:31:31,369 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:31:33,558 INFO [main] app.Main [Main.java:81] Vraćanje podataka iz backupa...
+2026-01-07 16:31:33,622 INFO [main] app.Main [Main.java:88] Podaci su uspješno vraćeni i pregaženi!
+2026-01-07 16:31:33,624 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 16:31:33,625 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 16:31:33,627 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 16:31:33,629 INFO [main] app.Main [Main.java:63] 3) Spremi Backup
+2026-01-07 16:31:33,630 INFO [main] app.Main [Main.java:64] 4) Izvrsi Backup
+2026-01-07 16:31:33,631 INFO [main] app.Main [Main.java:65] 5) Izlaz
+2026-01-07 16:31:33,631 INFO [main] app.Main [Main.java:66] Odabir: 
+2026-01-07 16:31:37,249 INFO [main] app.Main [Main.java:210] 
+=== PRETRAGA ===
+2026-01-07 16:31:37,250 INFO [main] app.Main [Main.java:211] 1) Po registraciji
+2026-01-07 16:31:37,250 INFO [main] app.Main [Main.java:212] 2) Po stanici
+2026-01-07 16:31:37,250 INFO [main] app.Main [Main.java:213] 3) Sve rute
+2026-01-07 16:31:37,250 INFO [main] app.Main [Main.java:214] 4) Sva vozila
+2026-01-07 16:31:37,250 INFO [main] app.Main [Main.java:215] 5) Električna vozila
+2026-01-07 16:31:37,251 INFO [main] app.Main [Main.java:216] 6) Dostupnost
+2026-01-07 16:31:37,251 INFO [main] app.Main [Main.java:217] 7) Najkraća/najduža ruta
+2026-01-07 16:31:37,251 INFO [main] app.Main [Main.java:218] 8) Najnovije/najstarije vozilo
+2026-01-07 16:31:37,251 INFO [main] app.Main [Main.java:219] 9) Nazad
+2026-01-07 16:31:37,251 INFO [main] app.Main [Main.java:220] Odabir: 
+2026-01-07 16:31:38,108 INFO [main] app.Main [Main.java:210] 
+=== PRETRAGA ===
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:211] 1) Po registraciji
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:212] 2) Po stanici
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:213] 3) Sve rute
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:214] 4) Sva vozila
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:215] 5) Električna vozila
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:216] 6) Dostupnost
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:217] 7) Najkraća/najduža ruta
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:218] 8) Najnovije/najstarije vozilo
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:219] 9) Nazad
+2026-01-07 16:31:38,109 INFO [main] app.Main [Main.java:220] Odabir: 

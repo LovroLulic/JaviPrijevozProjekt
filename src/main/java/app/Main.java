@@ -60,7 +60,9 @@ public class Main {
             log.info("\n=== GLAVNI MENU ===");
             log.info("1) Unos podataka");
             log.info("2) Pretraživanje");
-            log.info("3) Izlaz");
+            log.info("3) Spremi Backup");
+            log.info("4) Izvrsi Backup");
+            log.info("5) Izlaz");
             log.info("Odabir: ");
 
             izbor = scanner.nextInt();
@@ -69,10 +71,29 @@ public class Main {
             switch(izbor) {
                 case 1 -> menuUnos(scanner, korisnik, vozila, rute, korisnici, cjenik);
                 case 2 -> menuPretraga(scanner, vozila, rute);
-                case 3 -> log.info("Hvala i doviđenja!");
+                case 3 -> {
+                    log.info("Spremanje sigurnosne kopije...");
+                    BackupData trenutniPodaci = new BackupData(rute.getSveRute(), vozila.getSvaVozila());
+                    SerializationService.kreirajBackup(trenutniPodaci);
+                    log.info("Backup uspješno spremljen u backup.bin!");
+                }
+                case 4 -> {
+                    log.info("Vraćanje podataka iz backupa...");
+                    BackupData ucitaniBackup = SerializationService.ucitajBackup();
+
+                    if (ucitaniBackup != null) {
+                        // Ovdje "pregažujemo" trenutne liste s onima iz datoteke
+                        vozila.osvjeziPodatke(ucitaniBackup.getVehicles());
+                        rute.osvjeziPodatke(ucitaniBackup.getRoutes());
+                        log.info("Podaci su uspješno vraćeni i pregaženi!");
+                    } else {
+                        log.error("Greška: Backup datoteka nije pronađena ili je neispravna.");
+                    }
+                }
+                case 5 -> log.info("Hvala i doviđenja!");
                 default -> log.info("Krivi odabir!");
             }
-        } while(izbor != 3);
+        } while(izbor != 5);
 
         scanner.close();
         log.info("Program završen");

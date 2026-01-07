@@ -21,7 +21,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * @author Lovro Lulic
  * @version 1.0
  */
-public abstract class Vehicle {
+public abstract class Vehicle implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
     private String registration;
     private TipVozila type;
     private String color;

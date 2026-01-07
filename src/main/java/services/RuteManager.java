@@ -42,6 +42,12 @@ public class RuteManager {
         this.sveRute=JsonService.ucitajIzJsona(FILE_PATH,Route.class);
     }
 
+    public void osvjeziPodatke(List<Route> noviPodaci) {
+        this.sveRute = noviPodaci;
+
+        JsonService.spremiUJson("rute.json", sveRute);
+    }
+
     public void unosNoveRute(Scanner scanner, CijenaKarte cjenik) {
         System.out.println("=== UNOS NOVE RUTE ===");
 

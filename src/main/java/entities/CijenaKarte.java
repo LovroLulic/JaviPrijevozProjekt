@@ -21,8 +21,10 @@ public record CijenaKarte(
         BigDecimal nocnaCijena,
         BigDecimal studentskaNocna,
         BigDecimal umirovljenickaNocna)
+    implements java.io.Serializable
 
 {
+    private static final long serialVersionUID = 1L;
     /**
      * Provjerava je li vrijeme polaska unutar noćnog voznog reda (23:30 - 05:30).
      *

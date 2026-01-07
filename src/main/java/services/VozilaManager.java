@@ -25,6 +25,16 @@ public class VozilaManager {
 
     }
 
+    public void osvjeziPodatke(List<Vehicle> noviPodaci) {
+        this.svaVozila = noviPodaci;
+        this.vozilaPoRegistraciji.clear();
+        for (Vehicle v : svaVozila) {
+            vozilaPoRegistraciji.put(v.getRegistration().toUpperCase(), v);
+        }
+
+        JsonService.spremiUJson("vozila.json", svaVozila);
+    }
+
     public void dodajVozilo(Vehicle vozilo) {
         svaVozila.add(vozilo);
         vozilaPoRegistraciji.put(vozilo.getRegistration().toUpperCase(), vozilo);

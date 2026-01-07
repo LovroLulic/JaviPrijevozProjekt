@@ -10,7 +10,8 @@ import java.time.format.DateTimeFormatter;
  * @author Lovro Lulic
  * @version 1.0
  */
-public class Route {
+public class Route implements java.io.Serializable{
+    private static final long serialVersionUID = 1L;
     private Vehicle vehicle;
     private LocalDate date;
     private String time;

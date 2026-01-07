@@ -6,7 +6,8 @@ package entities;
  * @author Lovro Lulic
  * @version 1.0
  */
-public class Tramvaj extends Vehicle implements Elektricni{
+public class Tramvaj extends Vehicle implements Elektricni, java.io.Serializable{
+    private static final long serialVersionUID = 1L;
 
 
     public Tramvaj(){

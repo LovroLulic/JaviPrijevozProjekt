@@ -8,7 +8,8 @@ import java.util.Random;
  * @author Lovro Lulic
  * @version 1.0
  */
-public class Bus extends Vehicle implements Elektricni{
+public class Bus extends Vehicle implements Elektricni, java.io.Serializable{
+    private static final long serialVersionUID = 1L;
 
 
     private int pogon;
