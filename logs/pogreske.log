@@ -2464,3 +2464,26 @@ Dobrodosao Lovro Lulic (llulic, 20)
 2026-01-07 14:55:18,994 INFO [main] app.Main [Main.java:29] Program pokrenut
 2026-01-07 14:55:26,648 INFO [main] app.Main [Main.java:29] Program pokrenut
 2026-01-07 15:03:14,199 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:19:38,061 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:19:38,246 INFO [main] app.Main [Main.java:44] JSON prazan, dodajem početna vozila...
+2026-01-07 15:19:38,298 INFO [main] app.Main [Main.java:49] JSON prazan, dodajem pocetne rute...
+2026-01-07 15:20:00,778 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:20:01,033 INFO [main] app.Main [Main.java:49] JSON prazan, dodajem pocetne rute...
+2026-01-07 15:21:27,284 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:21:27,509 INFO [main] app.Main [Main.java:49] JSON prazan, dodajem pocetne rute...
+2026-01-07 15:23:52,287 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:23:52,574 INFO [main] app.Main [Main.java:49] JSON prazan, dodajem pocetne rute...
+2026-01-07 15:24:56,661 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:24:56,827 INFO [main] app.Main [Main.java:44] JSON prazan, dodajem početna vozila...
+2026-01-07 15:24:56,881 INFO [main] app.Main [Main.java:49] JSON prazan, dodajem pocetne rute...
+2026-01-07 15:25:10,209 INFO [main] app.Main [Main.java:55] Dobrodošao Lovro Lulic!
+2026-01-07 15:25:10,212 INFO [main] app.Main [Main.java:60] 
+=== GLAVNI MENU ===
+2026-01-07 15:25:10,212 INFO [main] app.Main [Main.java:61] 1) Unos podataka
+2026-01-07 15:25:10,212 INFO [main] app.Main [Main.java:62] 2) Pretraživanje
+2026-01-07 15:25:10,212 INFO [main] app.Main [Main.java:63] 3) Izlaz
+2026-01-07 15:25:10,212 INFO [main] app.Main [Main.java:64] Odabir: 
+2026-01-07 15:25:12,363 INFO [main] app.Main [Main.java:72] Hvala i doviđenja!
+2026-01-07 15:25:12,363 INFO [main] app.Main [Main.java:78] Program završen
+2026-01-07 15:25:40,460 INFO [main] app.Main [Main.java:29] Program pokrenut
+2026-01-07 15:25:40,699 INFO [main] app.Main [Main.java:44] JSON prazan, dodajem početna vozila...

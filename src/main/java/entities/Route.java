@@ -19,7 +19,9 @@ public class Route {
     private BigDecimal kilometers;
     private CijenaKarte cjenik;
 
-    public Route() {}
+    public Route() {
+        super();
+    }
 
     private Route(Vehicle vehicle, LocalDate date, String time, String pocetnastanica,String krajnastanica, BigDecimal kilometers, CijenaKarte cjenik) {
         this.vehicle = vehicle;

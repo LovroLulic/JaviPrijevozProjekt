@@ -9,7 +9,10 @@ package entities;
 public class Tramvaj extends Vehicle implements Elektricni{
 
 
-    public Tramvaj(){}
+    public Tramvaj(){
+        super();
+        this.setType( TipVozila.TRAMVAJ);
+    }
     /**
      * Konstruktor za stvaranje tramvaja.
      *

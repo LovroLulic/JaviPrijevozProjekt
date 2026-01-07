@@ -1,7 +1,19 @@
 package entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "vehicle_class"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Bus.class, name = "Bus"),
+        @JsonSubTypes.Type(value = Tramvaj.class, name = "Tramvaj")
+})
 /**
  * Predstavlja vozilo u sustavu javnog prijevoza.
  * Služi kao osnovna klasa za sve tipove vozila.
@@ -36,6 +48,7 @@ public abstract class Vehicle {
         return registration;
     }
 
+    @JsonIgnore
     public String getType() {
         return type.getNaziv();
     }

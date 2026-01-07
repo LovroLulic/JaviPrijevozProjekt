@@ -11,8 +11,12 @@ import java.util.Random;
 public class Bus extends Vehicle implements Elektricni{
 
 
-    private final int pogon;
+    private int pogon;
 
+    public Bus(){
+        super();
+        this.setType( TipVozila.BUS);
+    }
 
 
     /**
