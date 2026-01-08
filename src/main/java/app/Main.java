@@ -82,7 +82,6 @@ public class Main {
                     BackupData ucitaniBackup = SerializationService.ucitajBackup();
 
                     if (ucitaniBackup != null) {
-                        // Ovdje "pregažujemo" trenutne liste s onima iz datoteke
                         vozila.osvjeziPodatke(ucitaniBackup.getVehicles());
                         rute.osvjeziPodatke(ucitaniBackup.getRoutes());
                         log.info("Podaci su uspješno vraćeni i pregaženi!");

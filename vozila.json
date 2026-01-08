@@ -43,4 +43,9 @@
   "type" : "Tramvaj",
   "color" : "Plava",
   "year" : 2023
+}, {
+  "registration" : "ZG080126G",
+  "type" : "Bus",
+  "color" : "Plava",
+  "year" : 2024
 } ]
