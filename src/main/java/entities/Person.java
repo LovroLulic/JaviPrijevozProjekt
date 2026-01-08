@@ -6,7 +6,7 @@ package entities;
  * @author Lovro Lulic
  * @version 1.0
  */
-public abstract class Person {
+public abstract class Person implements java.io.Serializable {
     private String name;
     private int age;
 

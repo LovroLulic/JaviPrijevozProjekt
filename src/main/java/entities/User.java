@@ -93,10 +93,11 @@ public final class User extends Person implements Provjera {
      */
     @Override
     public boolean provjeriMail(String email) {
-        if(!email.contains("@")){
+
+        if(email==null || email.trim().isEmpty()){
             return false;
         }
-        if(email==null || email.trim().isEmpty()){
+        if(!email.contains("@")){
             return false;
         }
         return true;

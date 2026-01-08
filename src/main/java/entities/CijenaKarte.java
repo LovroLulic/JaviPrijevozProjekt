@@ -38,7 +38,7 @@ public record CijenaKarte(
 
         return(sat==23 && minuta>=30) ||
                 (sat>=0 && sat<5) ||
-                (sat==5 && minuta>=30);
+                (sat==5 && minuta<30);
     }
 
 

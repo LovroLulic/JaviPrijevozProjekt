@@ -38,4 +38,9 @@
   "type" : "Tramvaj",
   "color" : "Crvena",
   "year" : 2019
+}, {
+  "registration" : "ZG422023ML",
+  "type" : "Tramvaj",
+  "color" : "Plava",
+  "year" : 2023
 } ]

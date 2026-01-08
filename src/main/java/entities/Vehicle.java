@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.Objects;
+
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -82,4 +84,16 @@ public abstract class Vehicle implements java.io.Serializable {
      * Ispisuje informacije o vozilu.
      */
     public abstract void ispis();
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Vehicle vehicle)) return false;
+        return Objects.equals(registration, vehicle.registration) && type == vehicle.type && Objects.equals(color, vehicle.color) && Objects.equals(year, vehicle.year);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(registration, type, color, year);
+    }
 }

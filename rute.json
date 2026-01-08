@@ -61,4 +61,25 @@
     "studentskaNocna" : 2.5,
     "umirovljenickaNocna" : 3
   }
+}, {
+  "vehicle" : {
+    "type" : "Tramvaj",
+    "registration" : "ZG422023ML",
+    "type" : "Tramvaj",
+    "color" : "Plava",
+    "year" : 2023
+  },
+  "date" : [ 2026, 2, 4 ],
+  "time" : "22:45",
+  "pocetnastanica" : "Jarun",
+  "krajnastanica" : "Podbreznica",
+  "kilometers" : 16.53,
+  "cjenik" : {
+    "cijena" : 2.00,
+    "studentskaCijena" : 1.00,
+    "umirovljenickaCijena" : 1.5,
+    "nocnaCijena" : 4.5,
+    "studentskaNocna" : 2.5,
+    "umirovljenickaNocna" : 3
+  }
 } ]
